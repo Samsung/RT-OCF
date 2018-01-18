@@ -1,0 +1,14 @@
+#
+# For a description of the syntax of this configuration file,
+# see kconfig-language at https://www.kernel.org/doc/Documentation/kbuild/kconfig-language.txt
+#
+
+config IOTIVITY_RT
+	bool "Iotivity-RT Stack"
+	default y
+	---help---
+			iotivity-rt
+
+if IOTIVITY_RT
+source "$EXTERNALDIR/iotivity-rt/os/linux/OCF_Kconfig"
+endif

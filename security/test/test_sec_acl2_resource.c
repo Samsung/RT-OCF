@@ -1,0 +1,374 @@
+/****************************************************************************
+ *
+ * Copyright 2017 Samsung Electronics All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ *
+ ****************************************************************************/
+
+#include <fcntl.h>
+#include "unity.h"
+#include "unity_fixture.h"
+#include "ocf_types.h"
+#include "rt_logger.h"
+#include "rt_rep.h"
+#include "rt_uuid.h"
+#include "rt_sec_acl2_resource.h"
+#include "rt_sec_persistent_storage.h"
+#include "rt_sec_types.h"
+#include "rt_list.h"
+#include "rt_mem.h"
+#include "rt_sec_types.h"
+
+#define TAG "TEST_ACL2_RES"
+
+#ifdef CONFIG_IOTIVITY_RT
+static char ACL2_FILE[] = "/mnt/svr_acl2.dat";
+static char ACL2_NO_FILE[] = "/mnt/svr_no_acl2.dat";
+#else
+static char ACL2_FILE[] = "svr_acl2.dat";
+static char ACL2_NO_FILE[] = "svr_no_acl2.dat";
+#endif
+
+static uint8_t acl2_data[] = {
+	0xBF, 0x67, 0x61, 0x63, 0x6C, 0x69, 0x73, 0x74, 0x32, 0x86, 0xA4, 0x65, 0x61, 0x63, 0x65, 0x69,
+	0x64, 0x01, 0x67, 0x73, 0x75, 0x62, 0x6A, 0x65, 0x63, 0x74, 0xA1, 0x64, 0x75, 0x75, 0x69, 0x64,
+	0x78, 0x24, 0x31, 0x31, 0x31, 0x31, 0x31, 0x31, 0x31, 0x31, 0x2D, 0x31, 0x31, 0x31, 0x31, 0x2D,
+	0x31, 0x31, 0x31, 0x31, 0x2D, 0x31, 0x31, 0x31, 0x31, 0x2D, 0x31, 0x31, 0x31, 0x31, 0x31, 0x31,
+	0x31, 0x31, 0x31, 0x31, 0x31, 0x31, 0x69, 0x72, 0x65, 0x73, 0x6F, 0x75, 0x72, 0x63, 0x65, 0x73,
+	0x81, 0xA1, 0x64, 0x68, 0x72, 0x65, 0x66, 0x6D, 0x2F, 0x6F, 0x69, 0x63, 0x2F, 0x73, 0x65, 0x63,
+	0x2F, 0x64, 0x6F, 0x78, 0x6D, 0x6A, 0x70, 0x65, 0x72, 0x6D, 0x69, 0x73, 0x73, 0x69, 0x6F, 0x6E,
+	0x06, 0xA4, 0x65, 0x61, 0x63, 0x65, 0x69, 0x64, 0x02, 0x67, 0x73, 0x75, 0x62, 0x6A, 0x65, 0x63,
+	0x74, 0xA1, 0x64, 0x75, 0x75, 0x69, 0x64, 0x61, 0x2A, 0x69, 0x72, 0x65, 0x73, 0x6F, 0x75, 0x72,
+	0x63, 0x65, 0x73, 0x81, 0xA1, 0x64, 0x68, 0x72, 0x65, 0x66, 0x6D, 0x2F, 0x6F, 0x69, 0x63, 0x2F,
+	0x73, 0x65, 0x63, 0x2F, 0x63, 0x72, 0x65, 0x64, 0x6A, 0x70, 0x65, 0x72, 0x6D, 0x69, 0x73, 0x73,
+	0x69, 0x6F, 0x6E, 0x06, 0xA4, 0x65, 0x61, 0x63, 0x65, 0x69, 0x64, 0x03, 0x67, 0x73, 0x75, 0x62,
+	0x6A, 0x65, 0x63, 0x74, 0xA1, 0x64, 0x75, 0x75, 0x69, 0x64, 0x78, 0x24, 0x32, 0x32, 0x32, 0x32,
+	0x32, 0x32, 0x32, 0x32, 0x2D, 0x32, 0x32, 0x32, 0x32, 0x2D, 0x32, 0x32, 0x32, 0x32, 0x2D, 0x32,
+	0x32, 0x32, 0x32, 0x2D, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32,
+	0x69, 0x72, 0x65, 0x73, 0x6F, 0x75, 0x72, 0x63, 0x65, 0x73, 0x81, 0xA1, 0x62, 0x77, 0x63, 0x61,
+	0x2A, 0x6A, 0x70, 0x65, 0x72, 0x6D, 0x69, 0x73, 0x73, 0x69, 0x6F, 0x6E, 0x06, 0xA4, 0x65, 0x61,
+	0x63, 0x65, 0x69, 0x64, 0x04, 0x67, 0x73, 0x75, 0x62, 0x6A, 0x65, 0x63, 0x74, 0xA1, 0x68, 0x63,
+	0x6F, 0x6E, 0x6E, 0x74, 0x79, 0x70, 0x65, 0x6A, 0x61, 0x6E, 0x6F, 0x6E, 0x2D, 0x63, 0x6C, 0x65,
+	0x61, 0x72, 0x69, 0x72, 0x65, 0x73, 0x6F, 0x75, 0x72, 0x63, 0x65, 0x73, 0x81, 0xA1, 0x64, 0x68,
+	0x72, 0x65, 0x66, 0x6D, 0x2F, 0x6F, 0x69, 0x63, 0x2F, 0x73, 0x65, 0x63, 0x2F, 0x64, 0x6F, 0x78,
+	0x6D, 0x6A, 0x70, 0x65, 0x72, 0x6D, 0x69, 0x73, 0x73, 0x69, 0x6F, 0x6E, 0x06, 0xA4, 0x65, 0x61,
+	0x63, 0x65, 0x69, 0x64, 0x05, 0x67, 0x73, 0x75, 0x62, 0x6A, 0x65, 0x63, 0x74, 0xA1, 0x68, 0x63,
+	0x6F, 0x6E, 0x6E, 0x74, 0x79, 0x70, 0x65, 0x6A, 0x61, 0x75, 0x74, 0x68, 0x2D, 0x63, 0x72, 0x79,
+	0x70, 0x74, 0x69, 0x72, 0x65, 0x73, 0x6F, 0x75, 0x72, 0x63, 0x65, 0x73, 0x81, 0xA1, 0x64, 0x68,
+	0x72, 0x65, 0x66, 0x66, 0x2F, 0x6F, 0x69, 0x63, 0x2F, 0x64, 0x6A, 0x70, 0x65, 0x72, 0x6D, 0x69,
+	0x73, 0x73, 0x69, 0x6F, 0x6E, 0x06, 0xA4, 0x65, 0x61, 0x63, 0x65, 0x69, 0x64, 0x06, 0x67, 0x73,
+	0x75, 0x62, 0x6A, 0x65, 0x63, 0x74, 0xA1, 0x64, 0x75, 0x75, 0x69, 0x64, 0x78, 0x24, 0x65, 0x36,
+	0x31, 0x63, 0x33, 0x65, 0x36, 0x62, 0x2D, 0x39, 0x63, 0x35, 0x34, 0x2D, 0x34, 0x62, 0x38, 0x31,
+	0x2D, 0x38, 0x63, 0x65, 0x35, 0x2D, 0x66, 0x39, 0x30, 0x33, 0x39, 0x63, 0x31, 0x64, 0x30, 0x34,
+	0x63, 0x63, 0x69, 0x72, 0x65, 0x73, 0x6F, 0x75, 0x72, 0x63, 0x65, 0x73, 0x81, 0xA3, 0x64, 0x68,
+	0x72, 0x65, 0x66, 0x6B, 0x2F, 0x61, 0x2F, 0x64, 0x6F, 0x6F, 0x72, 0x6C, 0x6F, 0x63, 0x6B, 0x62,
+	0x72, 0x74, 0x82, 0x77, 0x78, 0x2E, 0x63, 0x6F, 0x6D, 0x2E, 0x73, 0x61, 0x6D, 0x73, 0x75, 0x6E,
+	0x67, 0x2E, 0x64, 0x6F, 0x6F, 0x72, 0x6C, 0x6F, 0x63, 0x6B, 0x31, 0x77, 0x78, 0x2E, 0x63, 0x6F,
+	0x6D, 0x2E, 0x73, 0x61, 0x6D, 0x73, 0x75, 0x6E, 0x67, 0x2E, 0x64, 0x6F, 0x6F, 0x72, 0x6C, 0x6F,
+	0x63, 0x6B, 0x32, 0x62, 0x69, 0x66, 0x82, 0x6F, 0x6F, 0x69, 0x63, 0x2E, 0x69, 0x66, 0x2E, 0x62,
+	0x61, 0x73, 0x65, 0x6C, 0x69, 0x6E, 0x65, 0x68, 0x6F, 0x69, 0x63, 0x2E, 0x69, 0x66, 0x2E, 0x61,
+	0x6A, 0x70, 0x65, 0x72, 0x6D, 0x69, 0x73, 0x73, 0x69, 0x6F, 0x6E, 0x06, 0x6A, 0x72, 0x6F, 0x77,
+	0x6E, 0x65, 0x72, 0x75, 0x75, 0x69, 0x64, 0x78, 0x24, 0x34, 0x34, 0x34, 0x34, 0x34, 0x34, 0x34,
+	0x34, 0x2D, 0x34, 0x34, 0x34, 0x34, 0x2D, 0x34, 0x34, 0x34, 0x34, 0x2D, 0x34, 0x34, 0x34, 0x34,
+	0x2D, 0x34, 0x34, 0x34, 0x34, 0x34, 0x34, 0x34, 0x34, 0x34, 0x34, 0x34, 0x34, 0xFF
+};
+
+FILE *acl2_fopen(const char *path, const char *mode)
+{
+	(void)path;
+	return fopen(ACL2_FILE, mode);
+}
+
+FILE *acl2_no_fopen(const char *path, const char *mode)
+{
+	(void)path;
+	return fopen(ACL2_NO_FILE, mode);
+}
+
+static rt_persistent_storage_handler_s ps_doxm = { acl2_fopen, fread, fwrite, fclose };
+static rt_persistent_storage_handler_s ps_pstat = { acl2_fopen, fread, fwrite, fclose };
+static rt_persistent_storage_handler_s ps_cred = { acl2_fopen, fread, fwrite, fclose };
+static rt_persistent_storage_handler_s ps_acl2 = { acl2_fopen, fread, fwrite, fclose };
+
+TEST_GROUP(test_sec_acl2_resource);
+
+TEST_SETUP(test_sec_acl2_resource)
+{
+	int fd;
+	if (0 < (fd = open(ACL2_FILE, O_WRONLY | O_CREAT, 0644))) {
+		write(fd, acl2_data, sizeof(acl2_data));
+		close(fd);
+	}
+	rt_sec_register_ps_handler(&ps_doxm, &ps_pstat, &ps_cred, &ps_acl2);
+	rt_mem_pool_init();
+	rt_random_init();
+	rt_resource_manager_init("Samsung", "1.0");
+
+}
+
+TEST_TEAR_DOWN(test_sec_acl2_resource)
+{
+	rt_resource_manager_terminate();
+	rt_mem_pool_terminate();
+}
+
+TEST(test_sec_acl2_resource, rt_sec_acl2_init)
+{
+	// Given
+
+	// When
+	ocf_result_t ret = rt_sec_acl2_init();
+
+	// Then
+	TEST_ASSERT_EQUAL_INT(OCF_OK, ret);
+
+	rt_sec_acl2_terminate();
+}
+
+TEST(test_sec_acl2_resource, rt_convert_acl2_to_payload)
+{
+	// Given
+	rt_sec_acl2_init();
+
+	rt_sec_acl2_s acl2;
+	rt_list_init(&acl2.aces, sizeof(rt_sec_ace_s), RT_MEMBER_OFFSET(rt_sec_ace_s, node));
+
+	rt_rep_decoder_s *decoder = rt_rep_decoder_init(acl2_data, sizeof(acl2_data));
+	rt_convert_payload_to_acl2(decoder, &acl2, false);
+	rt_rep_decoder_release(decoder);
+
+	// When
+	rt_rep_encoder_s *rep = rt_convert_acl2_to_payload(&acl2, false);
+
+	// Then
+	TEST_ASSERT_EQUAL_INT(sizeof(acl2_data), rep->payload_size);
+
+	rt_node_s *itr;
+	itr = acl2.aces.head;
+	while (itr) {
+		rt_sec_ace_s *var;
+		var = (rt_sec_ace_s *) rt_list_get_item(&acl2.aces, itr);
+		rt_sec_ace_resource_s *current = var->resources;
+		while (current) {
+			int i;
+			rt_mem_free(current->href);
+
+			for (i = 0; i < current->res_type_len; ++i) {
+				rt_mem_free(current->res_type[i]);
+			}
+			rt_mem_free(current->res_type);
+
+			for (i = 0; i < current->interface_len; ++i) {
+				rt_mem_free(current->interface[i]);
+			}
+			rt_mem_free(current->interface);
+
+			rt_sec_ace_resource_s *prev = current;
+			current = current->next;
+			rt_mem_free(prev);
+		}
+		itr = itr->next;
+	}
+	rt_list_terminate(&acl2.aces, NULL);
+
+	rt_sec_acl2_terminate();
+	rt_rep_encoder_release(rep);
+}
+
+TEST(test_sec_acl2_resource, rt_convert_payload_to_acl2)
+{
+	// Given
+	rt_sec_acl2_init();
+
+	// When
+	rt_sec_acl2_s acl2;
+	rt_list_init(&acl2.aces, sizeof(rt_sec_ace_s), RT_MEMBER_OFFSET(rt_sec_ace_s, node));
+	ocf_result_t ret;
+	rt_rep_decoder_s *rep = rt_rep_decoder_init(acl2_data, sizeof(acl2_data));
+
+	ret = rt_convert_payload_to_acl2(rep, &acl2, false);
+	rt_rep_decoder_release(rep);
+
+	// Then
+	TEST_ASSERT_EQUAL_INT(OCF_OK, ret);
+
+	char uuid_str[RT_UUID_STR_LEN];
+	rt_uuid_uuid2str(acl2.rowner_id, uuid_str, RT_UUID_STR_LEN);
+	char expected_uuid_str[RT_UUID_STR_LEN] = "44444444-4444-4444-4444-444444444444";
+	TEST_ASSERT_EQUAL_HEX8_ARRAY(expected_uuid_str, uuid_str, RT_UUID_STR_LEN);
+
+	rt_node_s *itr = acl2.aces.head;
+
+	// 1st item
+	rt_sec_ace_s *item = (rt_sec_ace_s *) rt_list_get_item(&acl2.aces, itr);
+
+	rt_uuid_t uuid_temp;
+	rt_uuid_str2uuid("11111111-1111-1111-1111-111111111111", uuid_temp);
+	TEST_ASSERT_EQUAL_STRING_LEN(uuid_temp, item->subject_uuid, RT_UUID_LEN);
+	rt_sec_ace_resource_s *resources1 = item->resources;
+
+	if (resources1) {
+		TEST_ASSERT_EQUAL_STRING(OCF_DOXM_HREF, resources1->href);
+	}
+
+	TEST_ASSERT_EQUAL_INT(6, item->permission);
+
+	// 2nd item
+	itr = itr->next;
+	item = (rt_sec_ace_s *) rt_list_get_item(&acl2.aces, itr);
+
+	TEST_ASSERT_EQUAL_STRING_LEN(OCF_WILDCARD_ALL, item->subject_uuid, OCF_WILDCARD_LEN);
+	TEST_ASSERT_EQUAL_INT(6, item->permission);
+	rt_sec_ace_resource_s *resources2 = item->resources;
+
+	if (resources2) {
+		TEST_ASSERT_EQUAL_STRING(OCF_CRED_HREF, resources2->href);
+	}
+	// 4th item
+	itr = itr->next->next;
+	item = (rt_sec_ace_s *) rt_list_get_item(&acl2.aces, itr);
+	rt_sec_ace_resource_s *resources4 = item->resources;
+
+	TEST_ASSERT_EQUAL_INT(ANON_CLEAR, item->subject_conn);
+	if (resources4) {
+		TEST_ASSERT_EQUAL_STRING(OCF_DOXM_HREF, resources4->href);
+	}
+	TEST_ASSERT_EQUAL_INT(6, item->permission);
+
+	itr = acl2.aces.head;
+	while (itr) {
+		rt_sec_ace_s *var;
+		var = (rt_sec_ace_s *) rt_list_get_item(&acl2.aces, itr);
+		rt_sec_ace_resource_s *current = var->resources;
+		while (current) {
+			int i;
+			rt_mem_free(current->href);
+
+			for (i = 0; i < current->res_type_len; ++i) {
+				rt_mem_free(current->res_type[i]);
+			}
+			rt_mem_free(current->res_type);
+
+			for (i = 0; i < current->interface_len; ++i) {
+				rt_mem_free(current->interface[i]);
+			}
+			rt_mem_free(current->interface);
+			rt_sec_ace_resource_s *prev = current;
+			current = current->next;
+			rt_mem_free(prev);
+		}
+		itr = itr->next;
+	}
+	rt_list_terminate(&acl2.aces, NULL);
+
+	rt_sec_acl2_terminate();
+}
+
+TEST(test_sec_acl2_resource, rt_sec_acl2_check_permission_by_subjectuuid)
+{
+	// Given
+	rt_sec_acl2_init();
+
+	// When
+	rt_uuid_t subject;
+	rt_uuid_str2uuid("11111111-1111-1111-1111-111111111111", subject);
+	uint16_t perm = 2;
+	const char *href = OCF_DOXM_HREF;
+	bool ret = rt_sec_acl2_check_permission_by_subjectuuid(subject, href, perm);
+	// then access grant
+	TEST_ASSERT_TRUE(ret);
+
+	// when
+	href = "/oic/sec/dox";
+	ret = rt_sec_acl2_check_permission_by_subjectuuid(subject, href, perm);
+	// then access deny due to href mismatch
+	TEST_ASSERT_FALSE(ret);
+
+	// when
+	href = OCF_DOXM_HREF;
+	perm = 1;
+	ret = rt_sec_acl2_check_permission_by_subjectuuid(subject, href, perm);
+	// then access deny due to permission
+	TEST_ASSERT_FALSE(ret);
+
+	//when
+	perm = 2;
+	rt_uuid_str2uuid("33333333-3333-3333-3333-333333333333", subject);
+	ret = rt_sec_acl2_check_permission_by_subjectuuid(subject, href, perm);
+	// then access deny due to subjectuuid & href mismatch
+	TEST_ASSERT_FALSE(ret);
+
+	//when
+	rt_uuid_str2uuid("33333333-3333-3333-3333-333333333333", subject);
+	href = "/oic/sec/cred";
+	perm = 2;
+	ret = rt_sec_acl2_check_permission_by_subjectuuid(subject, href, perm);
+	// then access grant due to wildcard subject
+	TEST_ASSERT_TRUE(ret);
+
+	//when
+	href = "/oic/sss/test";
+	rt_uuid_str2uuid("22222222-2222-2222-2222-222222222222", subject);
+	perm = 2;
+	ret = rt_sec_acl2_check_permission_by_subjectuuid(subject, href, perm);
+	// then access grant due to wildcard
+	TEST_ASSERT_TRUE(ret);
+
+	rt_sec_acl2_terminate();
+}
+
+TEST(test_sec_acl2_resource, rt_sec_acl2_check_permission_by_conntype)
+{
+	// Given
+	rt_sec_acl2_init();
+
+	// When
+	rt_sec_conn_type_t conntype = ANON_CLEAR;
+	uint16_t perm = 2;
+	const char *href = OCF_DOXM_HREF;
+	bool ret = rt_sec_acl2_check_permission_by_conntype(conntype, href, perm);
+	// then access grant
+	TEST_ASSERT_TRUE(ret);
+
+	conntype = AUTH_CRYPT;
+	href = CORE_D;
+	ret = rt_sec_acl2_check_permission_by_conntype(conntype, href, perm);
+	// then access grant
+	TEST_ASSERT_TRUE(ret);
+
+	rt_sec_acl2_terminate();
+}
+
+TEST_GROUP_RUNNER(test_sec_acl2_resource)
+{
+	RUN_TEST_CASE(test_sec_acl2_resource, rt_sec_acl2_init);
+	RUN_TEST_CASE(test_sec_acl2_resource, rt_convert_acl2_to_payload);
+	RUN_TEST_CASE(test_sec_acl2_resource, rt_convert_payload_to_acl2);
+	RUN_TEST_CASE(test_sec_acl2_resource, rt_sec_acl2_check_permission_by_subjectuuid);
+	RUN_TEST_CASE(test_sec_acl2_resource, rt_sec_acl2_check_permission_by_conntype);
+}
+
+#ifndef CONFIG_IOTIVITY_RT
+
+static void RunAllTests(void)
+{
+	RUN_TEST_GROUP(test_sec_acl2_resource);
+}
+
+int main(int argc, const char *argv[])
+{
+	return UnityMain(argc, argv, RunAllTests);
+}
+
+#endif

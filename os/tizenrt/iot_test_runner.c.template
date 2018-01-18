@@ -1,0 +1,13 @@
+#include "unity.h"
+#include "unity_fixture.h"
+#include <stdio.h>
+
+static void RunAllTests(void)
+{
+{{ RUN_TEST_GROUPS }}
+}
+
+int test_runner(int argc, const char *argv[])
+{
+	return UnityMain(argc, argv, RunAllTests);
+}

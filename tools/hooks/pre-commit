@@ -1,0 +1,10 @@
+#!/bin/sh
+
+#set -e
+
+echo '\033[93mCheck lint start...\033[0m'
+./tools/lint.py `git diff --cached --name-only`
+EXITCODE=$?
+echo '\033[93mCheck lint end...\033[0m'
+
+exit "${EXITCODE}"

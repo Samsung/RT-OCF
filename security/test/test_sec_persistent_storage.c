@@ -1,0 +1,218 @@
+/****************************************************************************
+ *
+ * Copyright 2017 Samsung Electronics All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ *
+ ****************************************************************************/
+
+#include <fcntl.h>
+#include <unistd.h>
+#include "unity.h"
+#include "unity_fixture.h"
+#include "ocf_types.h"
+#include "rt_mem.h"
+#include "rt_logger.h"
+#include "rt_sec_persistent_storage.h"
+
+#define TAG "TC_SEC_PS"
+
+#ifdef CONFIG_IOTIVITY_RT
+static char DOXM_FILE[] = "/mnt/svr_doxm.dat";
+static char DOXM_NO_FILE[] = "/mnt/svr_no_doxm.dat";
+#else
+static char DOXM_FILE[] = "svr_doxm.dat";
+static char DOXM_NO_FILE[] = "svr_no_doxm.dat";
+#endif
+
+static const char doxm_data[] = {
+	0xBF, 0x64, 0x6F, 0x78, 0x6D, 0x73, 0x81, 0x00, 0x66, 0x6F, 0x78, 0x6D, 0x73, 0x65, 0x6C, 0x00, 0x63, 0x73, 0x63, 0x74, 0x01, 0x65, 0x6F, 0x77, 0x6E, 0x65, 0x64, 0xF5, 0x6A, 0x64, 0x65, 0x76, 0x69, 0x63, 0x65, 0x75, 0x75, 0x69, 0x64, 0x78, 0x24, 0x36, 0x31, 0x36, 0x34, 0x36, 0x64, 0x36, 0x39, 0x2D, 0x36, 0x65, 0x34, 0x34, 0x2D, 0x36, 0x35, 0x37, 0x36, 0x2D, 0x36, 0x39, 0x36, 0x33, 0x2D, 0x36, 0x35, 0x35, 0x35, 0x37, 0x35, 0x36, 0x39, 0x36, 0x34, 0x33, 0x30, 0x6C, 0x64, 0x65, 0x76, 0x6F, 0x77, 0x6E, 0x65, 0x72, 0x75, 0x75, 0x69, 0x64, 0x78, 0x24, 0x36, 0x31, 0x36, 0x34, 0x36, 0x64, 0x36, 0x39, 0x2D, 0x36, 0x65, 0x34, 0x34, 0x2D, 0x36, 0x35, 0x37, 0x36, 0x2D, 0x36, 0x39, 0x36, 0x33, 0x2D, 0x36, 0x35, 0x35, 0x35, 0x37, 0x35, 0x36, 0x39, 0x36, 0x34, 0x33, 0x30, 0x6A, 0x72, 0x6F, 0x77, 0x6E, 0x65, 0x72, 0x75, 0x75, 0x69, 0x64, 0x78, 0x24, 0x36, 0x31, 0x36, 0x34, 0x36, 0x64, 0x36, 0x39, 0x2D, 0x36, 0x65, 0x34, 0x34, 0x2D, 0x36, 0x35, 0x37, 0x36, 0x2D, 0x36, 0x39, 0x36, 0x33, 0x2D,
+	0x36, 0x35, 0x35, 0x35, 0x37, 0x35, 0x36, 0x39, 0x36, 0x34, 0x33, 0x30, 0x62, 0x72, 0x74, 0x81, 0x6A, 0x6F, 0x69, 0x63, 0x2E, 0x72, 0x2E, 0x64, 0x6F, 0x78, 0x6D, 0x62, 0x69, 0x66, 0x81, 0x6F, 0x6F, 0x69, 0x63, 0x2E, 0x69, 0x66, 0x2E, 0x62, 0x61, 0x73, 0x65, 0x6C, 0x69, 0x6E, 0x65, 0xFF
+};
+
+static FILE *doxm_fopen(const char *path, const char *mode)
+{
+	(void)path;
+	return fopen(DOXM_FILE, mode);
+}
+
+static FILE *doxm_no_fopen(const char *path, const char *mode)
+{
+	(void)path;
+	return fopen(DOXM_NO_FILE, mode);
+}
+
+static rt_persistent_storage_handler_s ps_doxm = { doxm_fopen, fread, fwrite, fclose };
+static rt_persistent_storage_handler_s ps_pstat = { doxm_fopen, fread, fwrite, fclose };
+static rt_persistent_storage_handler_s ps_cred = { doxm_fopen, fread, fwrite, fclose };
+static rt_persistent_storage_handler_s ps_acl2 = { doxm_fopen, fread, fwrite, fclose };
+
+TEST_GROUP(test_sec_persistent_storage);
+
+TEST_SETUP(test_sec_persistent_storage)
+{
+	int fd;
+	if (0 < (fd = open(DOXM_FILE, O_WRONLY | O_CREAT, 0644))) {
+		write(fd, doxm_data, sizeof(doxm_data));
+		close(fd);
+	}
+
+	rt_mem_pool_init();
+}
+
+TEST_TEAR_DOWN(test_sec_persistent_storage)
+{
+	// remove(DOXM_FILE);
+
+	rt_mem_pool_terminate();
+}
+
+TEST(test_sec_persistent_storage, rt_sec_register_svr)
+{
+	// given
+
+	// when
+	ocf_result_t ret = rt_sec_register_ps_handler(&ps_doxm, &ps_pstat, &ps_cred, &ps_acl2);
+
+	// Then
+	TEST_ASSERT_EQUAL_INT(OCF_OK, ret);
+}
+
+TEST(test_sec_persistent_storage, rt_sec_register_svr_with_null_1)
+{
+	// given
+
+	// when
+	ocf_result_t ret = rt_sec_register_ps_handler(NULL, &ps_pstat, &ps_cred, &ps_acl2);
+
+	// Then
+	TEST_ASSERT_EQUAL_INT(OCF_INVALID_PARAM, ret);
+}
+
+TEST(test_sec_persistent_storage, rt_sec_register_svr_with_null_2)
+{
+	// given
+
+	// when
+	ocf_result_t ret = rt_sec_register_ps_handler(&ps_doxm, NULL, &ps_cred, &ps_acl2);
+
+	// Then
+	TEST_ASSERT_EQUAL_INT(OCF_INVALID_PARAM, ret);
+}
+
+TEST(test_sec_persistent_storage, rt_sec_register_svr_with_null_3)
+{
+	// given
+
+	// when
+	ocf_result_t ret = rt_sec_register_ps_handler(&ps_doxm, &ps_pstat, NULL, &ps_acl2);
+
+	// Then
+	TEST_ASSERT_EQUAL_INT(OCF_INVALID_PARAM, ret);
+}
+
+TEST(test_sec_persistent_storage, rt_sec_register_svr_with_null_4)
+{
+	// When
+	ocf_result_t ret = rt_sec_register_ps_handler(&ps_doxm, &ps_pstat, &ps_cred, NULL);
+
+	// Then
+	TEST_ASSERT_EQUAL_INT(OCF_INVALID_PARAM, ret);
+}
+
+TEST(test_sec_persistent_storage, rt_sec_register_svr_no_file)
+{
+	// given
+	rt_persistent_storage_handler_s ps_doxm_no_fopen = { doxm_no_fopen, fread, fwrite, fclose };
+
+	// when
+	ocf_result_t ret = rt_sec_register_ps_handler(&ps_doxm_no_fopen, &ps_pstat, &ps_cred, &ps_acl2);
+
+	// Then
+	TEST_ASSERT_EQUAL_INT(OCF_SVR_DB_NOT_EXIST, ret);
+}
+
+TEST(test_sec_persistent_storage, rt_sec_load_ps)
+{
+	// given
+	rt_sec_register_ps_handler(&ps_doxm, &ps_pstat, &ps_cred, &ps_acl2);
+
+	// when
+	rt_rep_decoder_s *rep = NULL;
+	ocf_result_t result = rt_sec_load_ps(RT_SEC_DOXM, &rep);
+
+	// then
+	TEST_ASSERT_EQUAL_UINT(OCF_OK, result);
+	TEST_ASSERT_EQUAL_HEX8_ARRAY(doxm_data, rep->payload, sizeof(doxm_data));
+	rt_rep_decoder_release(rep);
+}
+
+TEST(test_sec_persistent_storage, rt_sec_save_ps)
+{
+	// given
+	rt_sec_register_ps_handler(&ps_doxm, &ps_pstat, &ps_cred, &ps_acl2);
+
+	// when
+	rt_rep_encoder_s rep[1];
+	uint8_t data[] = {
+		0xBF, 0x64, 0x6F, 0x78, 0x6D, 0x73, 0x81, 0x00, 0x66, 0x6F, 0x78, 0x6D, 0x73, 0x65, 0x6C, 0x00,
+		0x63, 0x73, 0x63, 0x74, 0x01, 0x65, 0x6F, 0x77, 0x6E, 0x65, 0x64, 0xF5, 0x6A, 0x64, 0x65, 0x76,
+		0x69, 0x63, 0x65, 0x75, 0x75, 0x69, 0x64, 0x78, 0x24, 0x36, 0x31, 0x36, 0x34, 0x36, 0x64, 0x36,
+		0x39, 0x2D, 0x36, 0x65, 0x34, 0x34, 0x2D, 0x36, 0x35, 0x37, 0x36, 0x2D, 0x36, 0x39, 0x36, 0x33,
+		0x2D, 0x36, 0x35, 0x35, 0x35, 0x37, 0x35, 0x36, 0x39, 0x36, 0x34, 0x33, 0x30, 0x6C, 0x64, 0x65,
+		0x76, 0x6F, 0x77, 0x6E, 0x65, 0x72, 0x75, 0x75, 0x69, 0x64, 0x78, 0x24, 0x36, 0x31, 0x36, 0x34,
+		0x36, 0x64, 0x36, 0x39, 0x2D, 0x36, 0x65, 0x34, 0x34, 0x2D, 0x36, 0x35, 0x37, 0x36, 0x2D, 0x36,
+		0x39, 0x36, 0x33, 0x2D, 0x36, 0x35, 0x35, 0x35, 0x37, 0x35, 0x36, 0x39, 0x36, 0x34, 0x33, 0x30,
+		0x6A, 0x72, 0x6F, 0x77, 0x6E, 0x65, 0x72, 0x75, 0x75, 0x69, 0x64, 0x78, 0x24, 0x36, 0x31, 0x36,
+		0x34, 0x36, 0x64, 0x36, 0x39, 0x2D, 0x36, 0x65, 0x34, 0x34, 0x2D, 0x36, 0x35, 0x37, 0x36, 0x2D,
+		0x36, 0x39, 0x36, 0x33, 0x2D, 0x36, 0x35, 0x35, 0x35, 0x37, 0x35, 0x36, 0x39, 0x36, 0x34, 0x33,
+		0x30, 0xFF
+	};
+	rep->payload = data;
+	rep->payload_size = sizeof(data);
+	ocf_result_t result = rt_sec_save_ps(RT_SEC_DOXM, rep);
+
+	// then
+	rt_rep_decoder_s *decoder_rep = NULL;
+	rt_sec_load_ps(RT_SEC_DOXM, &decoder_rep);
+
+	TEST_ASSERT_EQUAL_UINT(OCF_OK, result);
+	TEST_ASSERT_EQUAL_HEX8_ARRAY(data, decoder_rep->payload, sizeof(data));
+	rt_rep_decoder_release(decoder_rep);
+}
+
+TEST_GROUP_RUNNER(test_sec_persistent_storage)
+{
+	RUN_TEST_CASE(test_sec_persistent_storage, rt_sec_register_svr);
+	RUN_TEST_CASE(test_sec_persistent_storage, rt_sec_register_svr_with_null_1);
+	RUN_TEST_CASE(test_sec_persistent_storage, rt_sec_register_svr_with_null_2);
+	RUN_TEST_CASE(test_sec_persistent_storage, rt_sec_register_svr_with_null_3);
+	RUN_TEST_CASE(test_sec_persistent_storage, rt_sec_register_svr_with_null_4);
+	RUN_TEST_CASE(test_sec_persistent_storage, rt_sec_register_svr_no_file);
+	RUN_TEST_CASE(test_sec_persistent_storage, rt_sec_load_ps);
+	RUN_TEST_CASE(test_sec_persistent_storage, rt_sec_save_ps);
+}
+
+#ifndef CONFIG_IOTIVITY_RT
+
+static void RunAllTests(void)
+{
+	RUN_TEST_GROUP(test_sec_persistent_storage);
+}
+
+int main(int argc, const char *argv[])
+{
+	return UnityMain(argc, argv, RunAllTests);
+}
+
+#endif

@@ -1,0 +1,11 @@
+:cmock:
+  :attributes:
+    - __funky
+    - __intrinsic
+  :when_ptr: :compare
+  :treat_externs: :include
+  :plugins:
+    - ignore
+    - ignore_arg
+    - expect_any_args
+    - callback
