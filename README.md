@@ -3,6 +3,7 @@
 The RT-OCF project is to develop an open source software framework which is a light-weight device-to-device (D2D) framework based on Open Connectivity Foundation (OCF) specification for IoT devices. RT-OCF targets TizenRT RTOS and provides functionalities such as device discovery, create/read/update/delete operations of device resources, resource observation, and so on. All target functionalities of RT-OCF are not yet completed. For example, provisioning to cloud considering sercurity together is underdeveloped.
 
 ## Overview
+
 The RT-OCF project is an open source project sponsored by Samsung. The aim of the RT-OCF project is to develop an open source software framework which is a light-weight device-to-device (D2D) framework based on Open Connectivity Foundation (OCF) specification for IoT devices. RT-OCF targets TizenRT RTOS and provides functionalities such as device discovery, create/read/update/delete operations of device resources, resource observation, and so on. All target functionalities of RT-OCF are not completed yet. Provisioning to cloud considering security together is underdeveloped.
 The Charter of the RT-OCF Open Source Project is to create, develop and maintain open source technologies. 
 
@@ -199,3 +200,6 @@ optional arguments:
   --all       True, if you want to flash all.
 ```
 
+## Documentation
+
+- [Governance and Community](docs/Governance.md)
