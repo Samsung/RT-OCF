@@ -17,17 +17,17 @@
 # ****************************************************************************/
 
 
-ifneq ($(CONFIG_IOTIVITY_RT),y)
-CSRCS += $(wildcard ${IOTIVITY_ROOT}/extlibs/mbedtls/*.c)
-INC += -I${IOTIVITY_ROOT}/extlibs/mbedtls/include
-DEPPATH += --dep-path ${IOTIVITY_ROOT}/extlibs/mbedtls
-VPATH += :${IOTIVITY_ROOT}/extlibs/mbedtls
+ifneq ($(CONFIG_RT_OCF),y)
+CSRCS += $(wildcard ${RT_OCF_ROOT}/extlibs/mbedtls/*.c)
+INC += -I${RT_OCF_ROOT}/extlibs/mbedtls/include
+DEPPATH += --dep-path ${RT_OCF_ROOT}/extlibs/mbedtls
+VPATH += :${RT_OCF_ROOT}/extlibs/mbedtls
 endif
 
-CSRCS += ${IOTIVITY_ROOT}/extlibs/tinycbor/src/cborparser.c \
-         ${IOTIVITY_ROOT}/extlibs/tinycbor/src/cborparser_dup_string.c \
-         ${IOTIVITY_ROOT}/extlibs/tinycbor/src/cborencoder.c \
-         ${IOTIVITY_ROOT}/extlibs/tinycbor/src/cborerrorstrings.c
-DEPPATH += --dep-path ${IOTIVITY_ROOT}/extlibs/tinycbor/src
-INC += -I${IOTIVITY_ROOT}/extlibs/tinycbor/src
-VPATH += :${IOTIVITY_ROOT}/extlibs/tinycbor/src
+CSRCS += ${RT_OCF_ROOT}/extlibs/tinycbor/src/cborparser.c \
+         ${RT_OCF_ROOT}/extlibs/tinycbor/src/cborparser_dup_string.c \
+         ${RT_OCF_ROOT}/extlibs/tinycbor/src/cborencoder.c \
+         ${RT_OCF_ROOT}/extlibs/tinycbor/src/cborerrorstrings.c
+DEPPATH += --dep-path ${RT_OCF_ROOT}/extlibs/tinycbor/src
+INC += -I${RT_OCF_ROOT}/extlibs/tinycbor/src
+VPATH += :${RT_OCF_ROOT}/extlibs/tinycbor/src

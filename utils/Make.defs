@@ -53,9 +53,9 @@
 
 MODULE_NAME = utils
 
-CSRCS += $(wildcard ${IOTIVITY_ROOT}/utils/*.c)
-INC += -I${IOTIVITY_ROOT}/utils/include
-DEPPATH += --dep-path ${IOTIVITY_ROOT}/utils
-VPATH += :${IOTIVITY_ROOT}/utils
+CSRCS += $(wildcard ${RT_OCF_ROOT}/utils/*.c)
+INC += -I${RT_OCF_ROOT}/utils/include
+DEPPATH += --dep-path ${RT_OCF_ROOT}/utils
+VPATH += :${RT_OCF_ROOT}/utils
 
-TESTCASE_SRCS += $(wildcard ${IOTIVITY_ROOT}/utils/test/*.c)
+TESTCASE_SRCS += $(wildcard ${RT_OCF_ROOT}/utils/test/*.c)

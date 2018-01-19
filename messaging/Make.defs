@@ -18,20 +18,20 @@
 
 MODULE_NAME = messaging
 
-CSRCS += ${IOTIVITY_ROOT}/messaging/coap/rt_coap.c \
-         ${IOTIVITY_ROOT}/messaging/coap/rt_coap_transactions.c \
-         ${IOTIVITY_ROOT}/messaging/coap/rt_coap_engine.c \
-         ${IOTIVITY_ROOT}/messaging/coap/rt_coap_block.c 
-CSRCS += $(wildcard ${IOTIVITY_ROOT}/messaging/transport/*.c)
-CSRCS += $(wildcard ${IOTIVITY_ROOT}/messaging/*.c)
-INC += -I${IOTIVITY_ROOT}/messaging/include
+CSRCS += ${RT_OCF_ROOT}/messaging/coap/rt_coap.c \
+         ${RT_OCF_ROOT}/messaging/coap/rt_coap_transactions.c \
+         ${RT_OCF_ROOT}/messaging/coap/rt_coap_engine.c \
+         ${RT_OCF_ROOT}/messaging/coap/rt_coap_block.c 
+CSRCS += $(wildcard ${RT_OCF_ROOT}/messaging/transport/*.c)
+CSRCS += $(wildcard ${RT_OCF_ROOT}/messaging/*.c)
+INC += -I${RT_OCF_ROOT}/messaging/include
 
 
-TESTCASE_SRCS += $(wildcard ${IOTIVITY_ROOT}/messaging/test/*.c)
+TESTCASE_SRCS += $(wildcard ${RT_OCF_ROOT}/messaging/test/*.c)
 
-DEPPATH += --dep-path ${IOTIVITY_ROOT}/messaging/transport
-DEPPATH += --dep-path ${IOTIVITY_ROOT}/messaging/coap
-DEPPATH += --dep-path ${IOTIVITY_ROOT}/messaging
-VPATH += :${IOTIVITY_ROOT}/messaging/transport
-VPATH += :${IOTIVITY_ROOT}/messaging/coap
-VPATH += :${IOTIVITY_ROOT}/messaging
+DEPPATH += --dep-path ${RT_OCF_ROOT}/messaging/transport
+DEPPATH += --dep-path ${RT_OCF_ROOT}/messaging/coap
+DEPPATH += --dep-path ${RT_OCF_ROOT}/messaging
+VPATH += :${RT_OCF_ROOT}/messaging/transport
+VPATH += :${RT_OCF_ROOT}/messaging/coap
+VPATH += :${RT_OCF_ROOT}/messaging

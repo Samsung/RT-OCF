@@ -33,25 +33,25 @@
 #
 ############################################################################
 
-ifeq ($(CONFIG_IOTIVITY_RT),y)
-CONFIGURED_EXT += iotivity-rt
+ifeq ($(CONFIG_RT_OCF),y)
+CONFIGURED_EXT += RT-OCF
 endif
 
-ifdef IOTIVITY_ROOT
-include $(IOTIVITY_ROOT)/utils/Make.defs
-include $(IOTIVITY_ROOT)/messaging/Make.defs
-include $(IOTIVITY_ROOT)/manager/Make.defs
-include $(IOTIVITY_ROOT)/resources/Make.defs
-include $(IOTIVITY_ROOT)/security/Make.defs
-include $(IOTIVITY_ROOT)/extlibs/Make.defs
-include $(IOTIVITY_ROOT)/api/Make.defs
+ifdef RT_OCF_ROOT
+include $(RT_OCF_ROOT)/utils/Make.defs
+include $(RT_OCF_ROOT)/messaging/Make.defs
+include $(RT_OCF_ROOT)/manager/Make.defs
+include $(RT_OCF_ROOT)/resources/Make.defs
+include $(RT_OCF_ROOT)/security/Make.defs
+include $(RT_OCF_ROOT)/extlibs/Make.defs
+include $(RT_OCF_ROOT)/api/Make.defs
 
 CSRCS +=
-INC += -I${IOTIVITY_ROOT}/include
+INC += -I${RT_OCF_ROOT}/include
 
-TESTCASE_SRCS += $(wildcard ${IOTIVITY_ROOT}/test/*.c)
+TESTCASE_SRCS += $(wildcard ${RT_OCF_ROOT}/test/*.c)
 
-DEPPATH += --dep-path ${IOTIVITY_ROOT}
-VPATH += :${IOTIVITY_ROOT}
+DEPPATH += --dep-path ${RT_OCF_ROOT}
+VPATH += :${RT_OCF_ROOT}
 
 endif

@@ -35,9 +35,9 @@
 
 MODULE_NAME = manager
 
-CSRCS += $(wildcard ${IOTIVITY_ROOT}/api/*.c)
-INC += -I${IOTIVITY_ROOT}/include
-DEPPATH += --dep-path ${IOTIVITY_ROOT}/api
-VPATH += :${IOTIVITY_ROOT}/api
+CSRCS += $(wildcard ${RT_OCF_ROOT}/api/*.c)
+INC += -I${RT_OCF_ROOT}/include
+DEPPATH += --dep-path ${RT_OCF_ROOT}/api
+VPATH += :${RT_OCF_ROOT}/api
 
-#TESTCASE_SRCS += $(wildcard ${IOTIVITY_ROOT}/api/test/*.c)
+#TESTCASE_SRCS += $(wildcard ${RT_OCF_ROOT}/api/test/*.c)
