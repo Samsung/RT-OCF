@@ -187,17 +187,11 @@ optional arguments:
 
 ## Flash to target board
 
-Use to install binaries on board.
+Use the following commands to install the output binaries on the board (Artik053).
 
 ```sh
-$ ./tools/flash.py  -h
-usage: flash.py [-h] [--all]
-
-Use to install binaries on board.
-
-optional arguments:
-  -h, --help  show this help message and exit
-  --all       True, if you want to flash all.
+$ cd ../../os/
+$ make download ALL
 ```
 
 ## Documentation
