@@ -3,12 +3,12 @@
 # see kconfig-language at https://www.kernel.org/doc/Documentation/kbuild/kconfig-language.txt
 #
 
-config IOTIVITY_RT
-	bool "Iotivity-RT Stack"
+config RT_OCF
+	bool "RT-OCF Stack"
 	default y
 	---help---
-			iotivity-rt
+			RT-OCF
 
-if IOTIVITY_RT
-source "$EXTERNALDIR/iotivity-rt/os/linux/OCF_Kconfig"
+if RT_OCF
+source "$EXTERNALDIR/RT-OCF/os/linux/OCF_Kconfig"
 endif

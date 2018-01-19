@@ -18,12 +18,12 @@
 
 MODULE_NAME = security
 
-CSRCS += $(wildcard ${IOTIVITY_ROOT}/security/*.c)
+CSRCS += $(wildcard ${RT_OCF_ROOT}/security/*.c)
 
-INC += -I${IOTIVITY_ROOT}/security/include
+INC += -I${RT_OCF_ROOT}/security/include
 
-TESTCASE_SRCS += $(wildcard ${IOTIVITY_ROOT}/security/test/*.c)
+TESTCASE_SRCS += $(wildcard ${RT_OCF_ROOT}/security/test/*.c)
 
-DEPPATH += --dep-path ${IOTIVITY_ROOT}/security
+DEPPATH += --dep-path ${RT_OCF_ROOT}/security
 
-VPATH += :${IOTIVITY_ROOT}/security
+VPATH += :${RT_OCF_ROOT}/security

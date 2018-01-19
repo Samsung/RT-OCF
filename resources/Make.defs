@@ -18,15 +18,15 @@
 
 MODULE_NAME = resources
 
-CSRCS += $(wildcard ${IOTIVITY_ROOT}/resources/*.c)
-CSRCS += $(wildcard ${IOTIVITY_ROOT}/resources/core/*.c)
+CSRCS += $(wildcard ${RT_OCF_ROOT}/resources/*.c)
+CSRCS += $(wildcard ${RT_OCF_ROOT}/resources/core/*.c)
 
-INC += -I${IOTIVITY_ROOT}/resources/include
+INC += -I${RT_OCF_ROOT}/resources/include
 
-TESTCASE_SRCS += $(wildcard ${IOTIVITY_ROOT}/resources/test/*.c)
+TESTCASE_SRCS += $(wildcard ${RT_OCF_ROOT}/resources/test/*.c)
 
-DEPPATH += --dep-path ${IOTIVITY_ROOT}/resources
-DEPPATH += --dep-path ${IOTIVITY_ROOT}/resources/core
+DEPPATH += --dep-path ${RT_OCF_ROOT}/resources
+DEPPATH += --dep-path ${RT_OCF_ROOT}/resources/core
 
-VPATH += :${IOTIVITY_ROOT}/resources
-VPATH += :${IOTIVITY_ROOT}/resources/core
+VPATH += :${RT_OCF_ROOT}/resources
+VPATH += :${RT_OCF_ROOT}/resources/core

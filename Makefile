@@ -16,7 +16,7 @@
 #
 ###########################################################################
 ############################################################################
-# external/iotivity-rt/Makefile
+# external/RTOCF-rt/Makefile
 #
 #   Copyright (C) 2012 Gregory Nutt. All rights reserved.
 #   Author: Gregory Nutt <gnutt@nuttx.org>
@@ -53,9 +53,9 @@
 -include $(TOPDIR)/.config
 -include $(TOPDIR)/Make.defs
 
-IOTIVITY_ROOT = .
+RT_OCF_ROOT = .
 
-include $(IOTIVITY_ROOT)/Make.defs
+include $(RT_OCF_ROOT)/Make.defs
 
 CFLAGS += $(INC)
 
