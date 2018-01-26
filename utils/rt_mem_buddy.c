@@ -21,7 +21,7 @@
 #include "rt_mem_buddy.h"
 #include "rt_utils.h"
 
-#ifdef CONFIG_IOTIVITY_RT_BUDDY_MEM_SYS
+#ifdef CONFIG_RT_OCF_BUDDY_MEM_SYS
 
 #define TAG "RT_MEM_BUDDY"
 #define ITEM_IS_LEFT 0

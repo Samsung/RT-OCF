@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_TEST_COMMON_H
-#define __IOTIVITY_RT_TEST_COMMON_H
+#ifndef __RT_OCF_TEST_COMMON_H
+#define __RT_OCF_TEST_COMMON_H
 
 #include <fcntl.h>
 #include <stdio.h>
@@ -27,7 +27,7 @@
 
 #define WAIT_TIME_SECONDS 5
 
-#ifdef CONFIG_IOTIVITY_RT
+#ifdef CONFIG_ENABLE_RT_OCF
 static const char TEMP_DOXM_PATH[] = "/mnt/test_svr_doxm.dat";
 static const char TEMP_CRED_PATH[] = "/mnt/test_svr_cred.dat";
 static const char TEMP_ACL2_PATH[] = "/mnt/test_svr_acl2.dat";

@@ -1,23 +1,23 @@
 import os
 
 # iotivity-rt
-IOTIVITY_RT_ROOT = os.path.abspath(
+RT_OCF_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '..', '..'))
-LINUX_BUILD_DIR = os.path.join(IOTIVITY_RT_ROOT, 'os', 'linux')
+LINUX_BUILD_DIR = os.path.join(RT_OCF_ROOT, 'os', 'linux')
 
-IOTIVITY_RT_FUNCTIONAL_TEST = os.path.join(IOTIVITY_RT_ROOT, 'test', 'functional')
+RT_OCF_FUNCTIONAL_TEST = os.path.join(RT_OCF_ROOT, 'test', 'functional')
 
 LINUX_LINUX_TEST_DIR = os.path.join(LINUX_BUILD_DIR, 'test')
 LINUX_LINUX_TEST_BIN_DIR = os.path.join(LINUX_LINUX_TEST_DIR, 'bin')
 
-TIZEN_RT_BUILD_DIR = os.path.join(IOTIVITY_RT_ROOT, 'os', 'tizenrt')
-IOTIVITY_RT_ROOT_TOOLS = os.path.join(IOTIVITY_RT_ROOT, 'tools')
-IOTIVITY_RT_ROOT_TOOLS_INTERNAL = os.path.join(
-    IOTIVITY_RT_ROOT_TOOLS, 'internal')
-IOTIVITY_RT_HOOK_PATH = os.path.join(IOTIVITY_RT_ROOT_TOOLS, 'hooks')
+TIZEN_RT_BUILD_DIR = os.path.join(RT_OCF_ROOT, 'os', 'tizenrt')
+RT_OCF_ROOT_TOOLS = os.path.join(RT_OCF_ROOT, 'tools')
+RT_OCF_ROOT_TOOLS_INTERNAL = os.path.join(
+    RT_OCF_ROOT_TOOLS, 'internal')
+RT_OCF_HOOK_PATH = os.path.join(RT_OCF_ROOT_TOOLS, 'hooks')
 
 # TizenRT
-TIZEN_RT_ROOT = os.path.abspath(os.path.join(IOTIVITY_RT_ROOT, '..', '..'))
+TIZEN_RT_ROOT = os.path.abspath(os.path.join(RT_OCF_ROOT, '..', '..'))
 TIZEN_RT_OS_DIR = os.path.join(TIZEN_RT_ROOT, 'os')
 TIZEN_RT_TOOLS_DIR = os.path.join(TIZEN_RT_OS_DIR, 'tools')
 

@@ -50,7 +50,7 @@
 #define HANDSHAKE_TIMEOUT (10)
 
 static const char *TAG = "RT_SSL";
-#ifdef CONFIG_IOTIVITY_RT_MBEDTLS_DEBUG
+#ifdef CONFIG_RT_OCF_MBEDTLS_DEBUG
 static const char *MBED_TLS_TAG = "RT_MBEDTLS";
 #define MBED_TLS_DEBUG_LEVEL (4)
 #endif
@@ -136,7 +136,7 @@ mbedtls_ecp_group_id rt_ssl_curve[RT_SSL_CURVE_MAX][2] = {
 	{MBEDTLS_ECP_DP_SECP256R1, MBEDTLS_ECP_DP_NONE}
 };
 
-#ifdef CONFIG_IOTIVITY_RT_MBEDTLS_DEBUG
+#ifdef CONFIG_RT_OCF_MBEDTLS_DEBUG
 static void rt_ssl_mbedtls_dbg(void *ctx, int level, const char *file, int line, const char *str)
 {
 	printf("%s IN\n", __func__);
@@ -261,7 +261,7 @@ static int rt_ssl_init_config(mbedtls_ssl_config *conf, uint8_t transport, uint8
 	if (MBEDTLS_SSL_TRANSPORT_DATAGRAM == transport && MBEDTLS_SSL_IS_SERVER == mode) {
 		mbedtls_ssl_conf_dtls_cookies(conf, mbedtls_ssl_cookie_write, mbedtls_ssl_cookie_check, &g_rt_ssl_ctx_s->cookieCtx);
 	}
-#ifdef CONFIG_IOTIVITY_RT_MBEDTLS_DEBUG
+#ifdef CONFIG_RT_OCF_MBEDTLS_DEBUG
 	mbedtls_ssl_conf_dbg(conf, rt_ssl_mbedtls_dbg, NULL);
 	mbedtls_debug_set_threshold(MBED_TLS_DEBUG_LEVEL);
 #endif

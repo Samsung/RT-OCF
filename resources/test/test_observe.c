@@ -288,7 +288,7 @@ TEST_GROUP_RUNNER(test_observe)
 	RUN_TEST_CASE(test_observe, given_observed_resource_when_irrelevant_cancel_observe_then_observe_should_not_be_deleted);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

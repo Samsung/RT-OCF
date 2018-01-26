@@ -331,7 +331,7 @@ TEST_GROUP_RUNNER(test_transport_mock)
 	RUN_TEST_CASE(test_transport_mock, MOCK_transport_receive_tcp_packet);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

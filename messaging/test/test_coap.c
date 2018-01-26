@@ -237,7 +237,7 @@ TEST_GROUP_RUNNER(test_coap)
 	RUN_TEST_CASE(test_coap, rt_coap_terminate);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

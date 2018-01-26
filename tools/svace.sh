@@ -7,7 +7,7 @@ CLEAN_CMD=""
 # For svace manager
 USER=jaehong.jo
 PASS=svace
-MODULE=17_IoTivity_RT_ALL
+MODULE=17_RT_OCF_ALL
 
 # For error check
 msg_error()

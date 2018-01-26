@@ -125,7 +125,7 @@ TEST_GROUP_RUNNER(test_core_device)
 	RUN_TEST_CASE(test_core_device, check_core_d_response_is_valid);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

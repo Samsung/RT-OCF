@@ -66,7 +66,7 @@ TEST_GROUP_RUNNER(test_ssl_common)
 	RUN_TEST_CASE(test_ssl_common, ssl_check_session);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

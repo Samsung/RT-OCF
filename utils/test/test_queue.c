@@ -110,7 +110,7 @@ TEST(test_queue, queue_pop_test)
 
 #define NUM_THD 5
 
-#ifdef CONFIG_IOTIVITY_RT
+#ifdef CONFIG_ENABLE_RT_OCF
 static int num_node = 50;
 #else
 static int num_node = 1500;
@@ -187,7 +187,7 @@ TEST_GROUP_RUNNER(test_queue)
 	RUN_TEST_CASE(test_queue, queue_terminate_without_init_queue_test);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

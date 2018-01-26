@@ -14,7 +14,7 @@ from internal.utils import raise_exception_if_exitcode_is_error
 from internal.utils import get_test_options
 
 from internal.tizenrt_testresult_collector import TestResultCollector
-from internal.iotivity_rt_error import IotivityRTError
+from internal.RT_OCF_error import RT_OCFError
 
 # OPENOCD_PATH = '{}/build/configs/artik053/tools/openocd'.format(TIZEN_RT_ROOT)
 
@@ -52,7 +52,7 @@ class TizenRTAdapter:
             self.generate_testcase_runner_and_makedefs()
             execute('sh -c "cd {} && make"'.format(TIZEN_RT_OS_DIR))
         except subprocess.CalledProcessError as e:
-            raise IotivityRTError(e.returncode, BUILD_FAIL_MESSAGE)
+            raise RT_OCFError(e.returncode, BUILD_FAIL_MESSAGE)
 
     def test(self, verbose=False, group='', name='', repeat=1, is_flash_all=False):
         try:
@@ -62,7 +62,7 @@ class TizenRTAdapter:
                 verbose=verbose, name=name, repeat=repeat, group=group)
             return self.collect_test_result(options)
         except subprocess.CalledProcessError as e:
-            raise IotivityRTError(e.returncode, TEST_FAIL_MESSAGE)
+            raise RT_OCFError(e.returncode, TEST_FAIL_MESSAGE)
 
     def copy_tizenrt_test_config(self):
         print('Copy TizenRT config file to execute unittest..')

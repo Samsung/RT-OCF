@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_RECEIVE_QUEUE_H
-#define __IOTIVITY_RT_RECEIVE_QUEUE_H
+#ifndef __RT_OCF_RECEIVE_QUEUE_H
+#define __RT_OCF_RECEIVE_QUEUE_H
 
 #include "ocf_types.h"
 #include "rt_data_handler.h"
@@ -42,4 +42,4 @@ ocf_result_t rt_receive_queue_response_enqueue(rt_data_s *packet, const ocf_endp
 ocf_result_t rt_receive_queue_set_request_callback(receive_callback callback);
 ocf_result_t rt_receive_queue_set_response_callback(receive_callback callback);
 
-#endif							/* __IOTIVITY_RT_RECEIVE_QUEUE_H */
+#endif							/* __RT_OCF_RECEIVE_QUEUE_H */

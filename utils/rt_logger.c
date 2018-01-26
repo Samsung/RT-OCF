@@ -32,11 +32,11 @@ const char *RT_LOG_STRING[5] = {
 	"FATAL"
 };
 
-#ifdef CONFIG_IOTIVITY_RT_LOG_FILTER
+#ifdef CONFIG_RT_OCF_LOG_FILTER
 static bool filter_checker(const char *tag)
 {
 	char *filter_ptr;
-	char filter_str[] = CONFIG_IOTIVITY_RT_LOG_FILTER_TAG;
+	char filter_str[] = CONFIG_RT_OCF_LOG_FILTER_TAG;
 	filter_ptr = strtok(filter_str, FILTER_TOKEN);
 
 	while (filter_ptr != NULL) {
@@ -55,7 +55,7 @@ void __rt_log(ocf_log_level_t level, const char *tag, const char *fmt, ...)
 	if (!(LOGLEVEL & (1 << level))) {
 		return;
 	}
-#ifdef CONFIG_IOTIVITY_RT_LOG_FILTER
+#ifdef CONFIG_RT_OCF_LOG_FILTER
 	if (!filter_checker(tag)) {
 		return;
 	}
@@ -77,7 +77,7 @@ void __rt_log_buffer(ocf_log_level_t level, const char *tag, const void *buffer,
 	if (!(LOGLEVEL & (1 << level))) {
 		return;
 	}
-#ifdef CONFIG_IOTIVITY_RT_LOG_FILTER
+#ifdef CONFIG_RT_OCF_LOG_FILTER
 	if (!filter_checker(tag)) {
 		return;
 	}

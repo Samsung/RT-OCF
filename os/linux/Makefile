@@ -2,10 +2,10 @@
 
 CC = gcc
 
-IOTIVITY_ROOT = ../..
+RT_OCF_ROOT = ../..
 DEPEND_FILE = .depend
 CSRCS =
-include $(IOTIVITY_ROOT)/Make.defs
+include $(RT_OCF_ROOT)/Make.defs
 
 LIBS = -pthread -lm
 CFLAGS = $(INC) -g
@@ -23,23 +23,23 @@ ARCHWARNINGS = -Wall -Werror -Wstrict-prototypes -Wshadow -Wundef \
 
 CFLAGS += $(ARCHWARNINGS)
 
-CMOCK_DIR=$(IOTIVITY_ROOT)/extlibs/CMock
+CMOCK_DIR=$(RT_OCF_ROOT)/extlibs/CMock
 UNITY_DIR=$(CMOCK_DIR)/vendor/unity
 
 UNITY_SRCS = $(UNITY_DIR)/src/unity.c \
 	$(UNITY_DIR)/extras/fixture/src/unity_fixture.c \
 	$(CMOCK_DIR)/src/cmock.c
 
-INC += -I$(IOTIVITY_ROOT)/os/linux \
+INC += -I$(RT_OCF_ROOT)/os/linux \
     -I$(UNITY_DIR)/src \
 	-I$(UNITY_DIR)/extras/fixture/src/ \
 	-I$(CMOCK_DIR)/src
 
-TEST_COMMON = $(wildcard $(IOTIVITY_ROOT)/test/utils/*.c)
-TEST_COMMON_INC = -I$(IOTIVITY_ROOT)/test/include
+TEST_COMMON = $(wildcard $(RT_OCF_ROOT)/test/utils/*.c)
+TEST_COMMON_INC = -I$(RT_OCF_ROOT)/test/include
 
-MOCK_INC = -I$(IOTIVITY_ROOT)/os/linux/mocks
-MOCK_SRC = $(wildcard $(IOTIVITY_ROOT)/os/linux/mocks/*.c)
+MOCK_INC = -I$(RT_OCF_ROOT)/os/linux/mocks
+MOCK_SRC = $(wildcard $(RT_OCF_ROOT)/os/linux/mocks/*.c)
 
 OBJS =  $(notdir $(CSRCS:.c=.o))
 
@@ -49,7 +49,7 @@ SAMPLE_MAIN = ctt_server \
 	simple_client \
 	simple_server
 
-SETDEFS = $(shell ($(IOTIVITY_ROOT)/tools/mkconfig . | sed -e 's/\"/\\\"/g' -e 's/\ /\\\ /g'))
+SETDEFS = $(shell ($(RT_OCF_ROOT)/tools/mkconfig . | sed -e 's/\"/\\\"/g' -e 's/\ /\\\ /g'))
 
 CFLAGS += $(SETDEFS)
 
@@ -73,13 +73,13 @@ dep :
 
 clean :
 	rm -rf  $(OBJS) $(TESTGROUP_BIN) $(LIB_NAME) $(SAMPLE_MAIN) *.gcno *.gcda *.cov covhtml test $(TEST_OBJS)
-	find $(IOTIVITY_ROOT) -name '*.o' -exec rm -rf {} \;
+	find $(RT_OCF_ROOT) -name '*.o' -exec rm -rf {} \;
 
 test : testsetup $(TEST_BINS)
 	for TEST_BIN in $(TEST_BINS) ; do \
 		./$$TEST_BIN -v | tee $$TEST_BIN.result ; \
 	done
-	UNITY_DIR=$(UNITY_DIR) ruby ${IOTIVITY_ROOT}/tools/internal/test_summary.rb
+	UNITY_DIR=$(UNITY_DIR) ruby ${RT_OCF_ROOT}/tools/internal/test_summary.rb
 
 testsetup :
 	mkdir -p test/bin

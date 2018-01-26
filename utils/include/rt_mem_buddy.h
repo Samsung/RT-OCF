@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_MEM_BUDDY_H
-#define __IOTIVITY_RT_MEM_BUDDY_H
+#ifndef __RT_OCF_MEM_BUDDY_H
+#define __RT_OCF_MEM_BUDDY_H
 
 #include "rt_list.h"
 #include "rt_mem.h"
@@ -39,4 +39,4 @@ static uint8_t check_direction(uint32_t pos, uint32_t total, uint32_t block_size
 static void merge_block(mem_info_s *mInfo, mem_buddy_info_s *var);
 static void print_buddy_list(mem_info_s *mInfo);
 
-#endif							/* __IOTIVITY_RT_MEM_BUDDY_H */
+#endif							/* __RT_OCF_MEM_BUDDY_H */

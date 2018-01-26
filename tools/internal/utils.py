@@ -66,7 +66,7 @@ def raise_exception_if_exitcode_is_error(result):
             cmd=result.message, returncode=result.exitcode)
 
 
-def find_iotivity_rt_source_files(targets):
+def find_RT_OCF_source_files(targets):
     files_list = []
     for target in targets:
         if os.path.isfile(target):

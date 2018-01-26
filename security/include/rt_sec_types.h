@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_SEC_TYPES_H
-#define __IOTIVITY_RT_SEC_TYPES_H
+#ifndef __RT_OCF_SEC_TYPES_H
+#define __RT_OCF_SEC_TYPES_H
 
 // doxm
 #define OCF_DOXM_HREF "/oic/sec/doxm"

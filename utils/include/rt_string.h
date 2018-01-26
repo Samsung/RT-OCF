@@ -16,10 +16,10 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_STRING_H
-#define __IOTIVITY_RT_STRING_H
+#ifndef __RT_OCF_STRING_H
+#define __RT_OCF_STRING_H
 
 char *rt_strncpy(char *dest_str, const char *src_str, const size_t len);
 char *rt_strcpy(char *dest_str, const char *src_str);
 
-#endif							/* __IOTIVITY_RT_STRING_H */
+#endif							/* __RT_OCF_STRING_H */

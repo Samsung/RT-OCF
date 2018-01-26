@@ -9,7 +9,7 @@ from internal.utils import write_result
 
 from internal.linux_adapter import LinuxAdapter
 from internal.tizenrt_adapter import TizenRTAdapter
-from internal.iotivity_rt_error import IotivityRTError
+from internal.RT_OCF_error import RT_OCFError
 
 from internal.config import LINUX_BUILD_DIR
 
@@ -50,7 +50,7 @@ def test_linux(args):
         if args.coverage:
             coverage_result = LinuxAdapter().coverage_lcov()
 
-    except IotivityRTError as e:
+    except RT_OCFError as e:
         test_result = Result(exitcode=e.exitcode, message=e.message)
         coverage_result = Result(exitcode=e.exitcode, message=e.message)
     finally:
@@ -79,7 +79,7 @@ def test_tizenrt(args):
             group=args.group,
             name=args.name,
             repeat=args.repeat)
-    except IotivityRTError as e:
+    except RT_OCFError as e:
         result = Result(exitcode=e.exitcode, message=e.message)
     finally:
         if args.is_ci:

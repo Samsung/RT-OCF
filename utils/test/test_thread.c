@@ -114,7 +114,7 @@ TEST_GROUP_RUNNER(test_thread)
 	RUN_TEST_CASE(test_thread, thread_terminate_test_return_ok_without_terminate_handler);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

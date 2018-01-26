@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_SEC_PSTAT_RESOURCE_H
-#define __IOTIVITY_RT_SEC_PSTAT_RESOURCE_H
+#ifndef __RT_OCF_SEC_PSTAT_RESOURCE_H
+#define __RT_OCF_SEC_PSTAT_RESOURCE_H
 
 #include "ocf_types.h"
 #include "rt_uuid.h"

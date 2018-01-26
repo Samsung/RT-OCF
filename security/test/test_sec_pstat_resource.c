@@ -30,7 +30,7 @@
 
 #define TAG "TEST_PSTAT_RES"
 
-#ifdef CONFIG_IOTIVITY_RT
+#ifdef CONFIG_ENABLE_RT_OCF
 static char PSTAT_FILE[] = "/mnt/svr_pstat.dat";
 static char PSTAT_NO_FILE[] = "/mnt/svr_no_pstat.dat";
 #else
@@ -126,7 +126,7 @@ TEST_GROUP_RUNNER(test_sec_pstat_resource)
 	RUN_TEST_CASE(test_sec_pstat_resource, rt_convert_pstat_to_payload);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

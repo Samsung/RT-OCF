@@ -24,15 +24,15 @@ Module :
 	Simple GC
 */
 
-#ifndef __IOTIVITY_RT_MEM_H
-#define __IOTIVITY_RT_MEM_H
+#ifndef __RT_OCF_MEM_H
+#define __RT_OCF_MEM_H
 
 #include <stdio.h>
 #include <stdint.h>
 #include "ocf_types.h"
 #include "rt_list.h"
 
-#ifdef CONFIG_IOTIVITY_RT_TRACE_MEMORY
+#ifdef CONFIG_RT_OCF_TRACE_MEMORY
 typedef struct _mem_logger {
 	char *func;
 	int size;
@@ -53,7 +53,7 @@ typedef struct _mem_logger {
 #define rt_mem_dup(ptr, size) (void *)__rt_mem_dup(ptr, size)
 #endif
 
-#ifdef CONFIG_IOTIVITY_RT
+#ifdef CONFIG_ENABLE_RT_OCF
 #define OCF_RT_MEM_POOL_SIZE 1024 * 128
 #else
 #define OCF_RT_MEM_POOL_SIZE 1024 * 256
@@ -65,14 +65,14 @@ typedef struct _mem_info {
 	int total;
 	void *ptr;
 	void *address;
-#if defined(CONFIG_IOTIVITY_RT_KERNEL_MEM_SYS)
+#if defined(CONFIG_RT_OCF_KERNEL_MEM_SYS)
 	rt_list_s *kernel_list;
-#elif defined(CONFIG_IOTIVITY_RT_BUDDY_MEM_SYS)
+#elif defined(CONFIG_RT_OCF_BUDDY_MEM_SYS)
 	int occupied;				// Sum of allocated physical memory
 	float external_frag_ratio;
 	rt_list_s *buddy_list;
 #endif
-#ifdef CONFIG_IOTIVITY_RT_TRACE_MEMORY
+#ifdef CONFIG_RT_OCF_TRACE_MEMORY
 	rt_list_s *mem_log_list;
 #endif
 } mem_info_s;
@@ -91,7 +91,7 @@ typedef struct _mem_remain_info {
 
 ocf_result_t rt_mem_pool_init(void);
 
-#ifdef CONFIG_IOTIVITY_RT_TRACE_MEMORY
+#ifdef CONFIG_RT_OCF_TRACE_MEMORY
 void *__rt_mem_alloc(int size, const char *func);
 void __rt_mem_free(void *ptr, const char *func);
 void *__rt_mem_dup(const void *ptr, int size, const char *func);
@@ -109,4 +109,4 @@ mem_info_s *getMemInfo(void);
 
 void print_mem_info(void);
 void print_mem_log(void);
-#endif							/* __IOTIVITY_RT_MEM_H */
+#endif							/* __RT_OCF_MEM_H */

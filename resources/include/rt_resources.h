@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_RESOURCES_H
-#define __IOTIVITY_RT_RESOURCES_H
+#ifndef __RT_OCF_RESOURCES_H
+#define __RT_OCF_RESOURCES_H
 
 #include "ocf_resources.h"
 #include "rt_list.h"

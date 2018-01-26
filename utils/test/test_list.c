@@ -500,7 +500,7 @@ TEST_GROUP_RUNNER(test_list)
 	RUN_TEST_CASE(test_list, list_delete_origin_when_delete_multiple_nodes_by_multiple_threads_then_thread_safety);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 static void RunAllTests(void)
 {
 	RUN_TEST_GROUP(test_list);

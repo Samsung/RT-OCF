@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_SEC_PERSISTENT_STORAGE_H
-#define __IOTIVITY_RT_SEC_PERSISTENT_STORAGE_H
+#ifndef __RT_OCF_SEC_PERSISTENT_STORAGE_H
+#define __RT_OCF_SEC_PERSISTENT_STORAGE_H
 
 #include "ocf_types.h"
 #include "rt_rep.h"

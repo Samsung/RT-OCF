@@ -27,7 +27,7 @@
 
 #define TAG "TC_SEC_PS"
 
-#ifdef CONFIG_IOTIVITY_RT
+#ifdef CONFIG_ENABLE_RT_OCF
 static char DOXM_FILE[] = "/mnt/svr_doxm.dat";
 static char DOXM_NO_FILE[] = "/mnt/svr_no_doxm.dat";
 #else
@@ -203,7 +203,7 @@ TEST_GROUP_RUNNER(test_sec_persistent_storage)
 	RUN_TEST_CASE(test_sec_persistent_storage, rt_sec_save_ps);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

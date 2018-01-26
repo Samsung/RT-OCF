@@ -328,7 +328,7 @@ TEST_GROUP_RUNNER(test_endpoint)
 	RUN_TEST_CASE(test_endpoint, rt_endpoint_get_flags_from_ep_for_coaps_tcp_ipv6);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

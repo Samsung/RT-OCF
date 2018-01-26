@@ -13,16 +13,16 @@ from internal.leak_calculator import LeakCalculator
 from internal.peak_calculator import PeakCalculator
 from internal.peak_calculator import Peak
 
-from internal.iotivity_rt_error import IotivityRTError
+from internal.RT_OCF_error import RT_OCFError
 
-from internal.config import IOTIVITY_RT_FUNCTIONAL_TEST
+from internal.config import RT_OCF_FUNCTIONAL_TEST
 
 from internal.config import CI_LINUX_LEAK_FILE_NAME
 from internal.config import CI_LINUX_PEAK_FILE_NAME
 
 import glob
 
-FUNCTIONAL_TESTS = glob.glob(os.path.join(IOTIVITY_RT_FUNCTIONAL_TEST, 'test_*.py'))
+FUNCTIONAL_TESTS = glob.glob(os.path.join(RT_OCF_FUNCTIONAL_TEST, 'test_*.py'))
 
 PEAK_FAIL_MESSAGE = "Calculating memory peak is Failed T^T"
 LEAK_FAIL_MESSAGE = "Calculating memory leak is Failed T^T"
@@ -63,7 +63,7 @@ def run(args):
                 peak_max = peak_dic[filename]
         leak_message = 'Memory Leak: {} bytes'.format(str(leak_total))
         peak_message = 'Memory Peak: {}'.format(str(peak_max))
-    except IotivityRTError as e:
+    except RT_OCFError as e:
         peak_message = PEAK_FAIL_MESSAGE
         leak_message = LEAK_FAIL_MESSAGE
         result = Result(exitcode=e.exitcode, message=e.message)
@@ -84,7 +84,7 @@ def run(args):
 def run_peak(is_ci):
     try:
         result = PeakCalculator().calculate(FUNCTIONAL_TESTS)
-    except IotivityRTError as e:
+    except RT_OCFError as e:
         result = Result(exitcode=e.exitcode, message=e.message)
     finally:
         if args.is_ci:

@@ -3,12 +3,12 @@
 # see kconfig-language at https://www.kernel.org/doc/Documentation/kbuild/kconfig-language.txt
 #
 
-config RT_OCF
-	bool "RT-OCF Stack"
+config ENABLE_RT_OCF
+	bool "RT-OCF Framework"
 	default y
 	---help---
-			RT-OCF
+			Enable/Disable D2D Framework based on OCF
 
-if RT_OCF
+if ENABLE_RT_OCF
 source "$EXTERNALDIR/RT-OCF/os/linux/OCF_Kconfig"
 endif

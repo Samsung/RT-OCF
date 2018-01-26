@@ -17,7 +17,7 @@
 # ****************************************************************************/
 
 
-ifneq ($(CONFIG_RT_OCF),y)
+ifneq ($(CONFIG_ENABLE_RT_OCF),y)
 CSRCS += $(wildcard ${RT_OCF_ROOT}/extlibs/mbedtls/*.c)
 INC += -I${RT_OCF_ROOT}/extlibs/mbedtls/include
 DEPPATH += --dep-path ${RT_OCF_ROOT}/extlibs/mbedtls

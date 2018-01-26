@@ -90,7 +90,7 @@ TEST_GROUP_RUNNER(test_core_platform_with_ocf_init)
 	RUN_TEST_CASE(test_core_platform_with_ocf_init, check_core_p_response_is_valid);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

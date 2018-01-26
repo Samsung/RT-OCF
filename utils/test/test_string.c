@@ -111,7 +111,7 @@ TEST_GROUP_RUNNER(test_string)
 	RUN_TEST_CASE(test_string, basic_test_rt_strcpy);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 static void RunAllTests(void)
 {
 	RUN_TEST_GROUP(test_string);

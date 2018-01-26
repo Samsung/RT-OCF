@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_SEC_MANAGER_H
-#define __IOTIVITY_RT_SEC_MANAGER_H
+#ifndef __RT_OCF_SEC_MANAGER_H
+#define __RT_OCF_SEC_MANAGER_H
 
 ocf_result_t rt_sec_init(void);
 ocf_result_t rt_sec_terminate(void);

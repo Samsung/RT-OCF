@@ -126,7 +126,7 @@ TEST_GROUP_RUNNER(test_netmonitor)
 	RUN_TEST_CASE(test_netmonitor, rt_unregister_netmonitor_unregistered_func);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

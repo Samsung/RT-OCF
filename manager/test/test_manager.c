@@ -64,7 +64,7 @@ TEST_GROUP_RUNNER(test_manager)
 	RUN_TEST_CASE(test_manager, ocf_init_null_manufacture);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

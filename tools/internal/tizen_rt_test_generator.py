@@ -4,8 +4,8 @@ import os
 from subprocess import call
 
 
-from internal.config import IOTIVITY_RT_ROOT
-from internal.config import IOTIVITY_RT_ROOT_TOOLS
+from internal.config import RT_OCF_ROOT
+from internal.config import RT_OCF_ROOT_TOOLS
 from internal.config import LINUX_BUILD_DIR
 from internal.config import TIZEN_RT_BUILD_DIR
 
@@ -32,8 +32,8 @@ class TizenRTTestGenerator:
         for file in test_files:
             f.write(
                 file.replace(
-                    IOTIVITY_RT_ROOT,
-                    'CSRCS += $(IOTIVITYRT_ROOT)'))
+                    RT_OCF_ROOT,
+                    'CSRCS += $(RT_OCF_ROOT)'))
             f.write('\n')
         f.close()
 
@@ -66,7 +66,7 @@ class TizenRTTestGenerator:
 
     def find_test_file_list(self):
         result = []
-        for (path, dir, files) in os.walk(IOTIVITY_RT_ROOT):
+        for (path, dir, files) in os.walk(RT_OCF_ROOT):
             if 'os/linux/test' in path:
                 continue
             if 'extlibs/' in path:

@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_THREAD_H
-#define __IOTIVITY_RT_THREAD_H
+#ifndef __RT_OCF_THREAD_H
+#define __RT_OCF_THREAD_H
 
 #include <pthread.h>
 #include "ocf_types.h"
@@ -37,4 +37,4 @@ ocf_result_t rt_thread_init(rt_thread_s *thread_info, rt_thread_handler handler,
 // dummy terminate_handler makes it call pthread_join() instead of pthread_cancel()
 ocf_result_t rt_thread_terminate(rt_thread_s *thread_info, rt_thread_terminate_handler terminate_handler, void *user_data);
 
-#endif							/* __IOTIVITY_RT_THREAD_H */
+#endif							/* __RT_OCF_THREAD_H */

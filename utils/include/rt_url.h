@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_PARSER_H
-#define __IOTIVITY_RT_PARSER_H
+#ifndef __RT_OCF_PARSER_H
+#define __RT_OCF_PARSER_H
 
 #include <stdbool.h>
 #include <string.h>
@@ -60,4 +60,4 @@ void rt_url_field_print(rt_url_field_s *url);
 #ifdef __cplusplus
 }
 #endif
-#endif							/* __IOTIVITY_RT_PARSER_H */
+#endif							/* __RT_OCF_PARSER_H */

@@ -106,7 +106,7 @@ TEST_GROUP_RUNNER(test_random)
 	RUN_TEST_CASE(test_random, random_rand_test_to_buffer_odd_size);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

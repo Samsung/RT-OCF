@@ -369,7 +369,7 @@ TEST_GROUP_RUNNER(test_core_resource_with_ocf_init)
 
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

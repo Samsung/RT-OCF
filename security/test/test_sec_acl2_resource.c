@@ -32,7 +32,7 @@
 
 #define TAG "TEST_ACL2_RES"
 
-#ifdef CONFIG_IOTIVITY_RT
+#ifdef CONFIG_ENABLE_RT_OCF
 static char ACL2_FILE[] = "/mnt/svr_acl2.dat";
 static char ACL2_NO_FILE[] = "/mnt/svr_no_acl2.dat";
 #else
@@ -359,7 +359,7 @@ TEST_GROUP_RUNNER(test_sec_acl2_resource)
 	RUN_TEST_CASE(test_sec_acl2_resource, rt_sec_acl2_check_permission_by_conntype);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

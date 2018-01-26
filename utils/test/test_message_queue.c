@@ -175,7 +175,7 @@ TEST_GROUP_RUNNER(test_message_queue)
 	RUN_TEST_CASE(test_message_queue, terminate);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

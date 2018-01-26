@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_UUID_H
-#define __IOTIVITY_RT_UUID_H
+#ifndef __RT_OCF_UUID_H
+#define __RT_OCF_UUID_H
 
 #include "ocf_types.h"
 
