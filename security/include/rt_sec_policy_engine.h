@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_SEC_POLICY_ENGINE_H
-#define __IOTIVITY_RT_SEC_POLICY_ENGINE_H
+#ifndef __RT_OCF_SEC_POLICY_ENGINE_H
+#define __RT_OCF_SEC_POLICY_ENGINE_H
 
 #include "rt_request.h"
 

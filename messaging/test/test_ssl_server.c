@@ -198,7 +198,7 @@ TEST_GROUP_RUNNER(test_ssl_server)
 	RUN_TEST_CASE(test_ssl_server, rt_ssl_close_connection);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

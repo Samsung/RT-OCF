@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include "rt_logger.h"
 
-#ifdef CONFIG_IOTIVITY_RT_KERNEL_MEM_SYS
+#ifdef CONFIG_RT_OCF_KERNEL_MEM_SYS
 
 #define TAG "RT_MEM_KERNEL"
 

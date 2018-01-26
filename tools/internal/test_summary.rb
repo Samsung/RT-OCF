@@ -1,8 +1,8 @@
 INTERNAL_TOOLS_DIR=File.expand_path(File.dirname(__FILE__))
 TOOLS_DIR=File.expand_path(File.join(INTERNAL_TOOLS_DIR, '..'))
-IOTIVITY_RT_ROOT=File.expand_path(File.join(TOOLS_DIR, '..'))
-UNITY_DIR=File.expand_path(File.join(IOTIVITY_RT_ROOT, 'extlibs', 'CMock', 'vendor', 'unity'))
-TEST_REPORT_DIR = File.expand_path(File.join(IOTIVITY_RT_ROOT, 'os', 'linux', 'test', 'bin'))
+RT_OCF_ROOT=File.expand_path(File.join(TOOLS_DIR, '..'))
+UNITY_DIR=File.expand_path(File.join(RT_OCF_ROOT, 'extlibs', 'CMock', 'vendor', 'unity'))
+TEST_REPORT_DIR = File.expand_path(File.join(RT_OCF_ROOT, 'os', 'linux', 'test', 'bin'))
 suppress_error = !ARGV.nil? && !ARGV.empty? && (ARGV[0].upcase == "--SILENT")
 
 

@@ -156,7 +156,7 @@ TEST_GROUP_RUNNER(test_data_handler)
 	RUN_TEST_CASE(test_data_handler, create_token);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

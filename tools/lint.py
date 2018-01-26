@@ -2,19 +2,19 @@
 
 import sys
 
-from internal.config import IOTIVITY_RT_ROOT
+from internal.config import RT_OCF_ROOT
 from internal.config import CI_LINT_FILE_NAME
 
 from internal.utils import write_result
-from internal.utils import find_iotivity_rt_source_files
+from internal.utils import find_RT_OCF_source_files
 
 from internal.linter import Linter
 
 
 def run(targets, show_warning, is_ci, is_all):
     if is_all:
-        targets.append(IOTIVITY_RT_ROOT)
-    file_list = find_iotivity_rt_source_files(targets)
+        targets.append(RT_OCF_ROOT)
+    file_list = find_RT_OCF_source_files(targets)
 
     result = Linter().execute(file_list, show_warning)
 

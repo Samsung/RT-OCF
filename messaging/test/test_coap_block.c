@@ -362,7 +362,7 @@ TEST_GROUP_RUNNER(test_coap_block)
 	RUN_TEST_CASE(test_coap_block, rt_coap_block1_block2_combine_CON_test);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

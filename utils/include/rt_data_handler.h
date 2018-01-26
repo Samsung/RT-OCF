@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_DATA_HANDLER_H
-#define __IOTIVITY_RT_DATA_HANDLER_H
+#ifndef __RT_OCF_DATA_HANDLER_H
+#define __RT_OCF_DATA_HANDLER_H
 
 #include "ocf_types.h"
 #include "rt_coap_constants.h"

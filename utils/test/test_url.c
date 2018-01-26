@@ -88,7 +88,7 @@ TEST_GROUP_RUNNER(test_url)
 	RUN_TEST_CASE(test_url, query_parse);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 static void RunAllTests(void)
 {
 	RUN_TEST_GROUP(test_url);

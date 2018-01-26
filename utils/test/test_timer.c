@@ -86,7 +86,7 @@ TEST_GROUP_RUNNER(test_timer)
 	RUN_TEST_CASE(test_timer, timer_restart_test);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_CORE_H
-#define __IOTIVITY_RT_CORE_H
+#ifndef __RT_OCF_CORE_H
+#define __RT_OCF_CORE_H
 
 #include "ocf_types.h"
 #include "rt_resources.h"
@@ -45,4 +45,4 @@ ocf_result_t rt_core_remove_introspection(void);
 ocf_result_t rt_core_set_oic_d_name_opt(const char *value);
 ocf_result_t rt_core_add_oic_d_type(const char **device_types, uint8_t device_types_count);
 
-#endif							/* __IOTIVITY_RT_CORE_H */
+#endif							/* __RT_OCF_CORE_H */

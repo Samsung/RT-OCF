@@ -8,7 +8,7 @@ from internal.utils import write_result
 
 from internal.linux_adapter import LinuxAdapter
 from internal.tizenrt_adapter import TizenRTAdapter
-from internal.iotivity_rt_error import IotivityRTError
+from internal.RT_OCF_error import RT_OCFError
 
 from internal.config import CI_LINUX_BUILD_FILE_NAME
 from internal.config import CI_TIZENRT_BUILD_FILE_NAME
@@ -21,7 +21,7 @@ def build_linux(args):
         if args.rebuild:
             adapter.distclean()
         adapter.build()
-    except IotivityRTError as e:
+    except RT_OCFError as e:
         result = Result(exitcode=e.exitcode, message=e.message)
     finally:
         if args.is_ci:
@@ -39,7 +39,7 @@ def build_tizenrt(args):
         adapter.build()
         if args.with_flash:
             adapter.flash_binary()
-    except IotivityRTError as e:
+    except RT_OCFError as e:
         result = Result(exitcode=e.exitcode, message=e.message)
     finally:
         if args.is_ci:

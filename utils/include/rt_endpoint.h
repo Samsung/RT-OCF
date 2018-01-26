@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_ENDPOINT_H_
-#define __IOTIVITY_RT_ENDPOINT_H_
+#ifndef __RT_OCF_ENDPOINT_H_
+#define __RT_OCF_ENDPOINT_H_
 
 #include <stdint.h>
 #include "ocf_types.h"
@@ -37,4 +37,4 @@ ocf_result_t rt_endpoint_get_flags(rt_url_field_s *parse_url, ocf_transport_flag
 #ifdef __cplusplus
 }
 #endif							// __cplusplus
-#endif							/* __IOTIVITY_RT_ENDPOINT_H_ */
+#endif							/* __RT_OCF_ENDPOINT_H_ */

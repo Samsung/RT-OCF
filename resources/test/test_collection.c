@@ -293,7 +293,7 @@ TEST_GROUP_RUNNER(test_col_testing_links)
 	RUN_TEST_CASE(test_col_testing_links, get_link_from_colres_return_ok);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

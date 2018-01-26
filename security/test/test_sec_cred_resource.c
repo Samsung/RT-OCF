@@ -30,7 +30,7 @@
 
 #define TAG "TEST_CRED_RES"
 
-#ifdef CONFIG_IOTIVITY_RT
+#ifdef CONFIG_ENABLE_RT_OCF
 static char CRED_FILE[] = "/mnt/svr_cred.dat";
 static char CRED_NO_FILE[] = "/mnt/svr_no_cred.dat";
 #else
@@ -255,7 +255,7 @@ TEST_GROUP_RUNNER(test_sec_cred_resource)
 	RUN_TEST_CASE(test_sec_cred_resource, rt_convert_cred_to_payload);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

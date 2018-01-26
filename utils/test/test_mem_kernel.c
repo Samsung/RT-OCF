@@ -16,7 +16,7 @@
  *
  ****************************************************************************/
 
-#if defined(CONFIG_IOTIVITY_RT_KERNEL_MEM_SYS)
+#if defined(CONFIG_RT_OCF_KERNEL_MEM_SYS)
 #include "unity.h"
 #include "unity_fixture.h"
 #include <stdio.h>
@@ -209,11 +209,11 @@ TEST_GROUP_RUNNER(test_mem)
 }
 #endif
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {
-#if defined(CONFIG_IOTIVITY_RT_KERNEL_MEM_SYS)
+#if defined(CONFIG_RT_OCF_KERNEL_MEM_SYS)
 	RUN_TEST_GROUP(test_mem);
 #endif
 }

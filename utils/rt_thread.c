@@ -22,7 +22,7 @@
 
 #define TAG "THREAD"
 
-#ifdef CONFIG_IOTIVITY_RT
+#ifdef CONFIG_ENABLE_RT_OCF
 #define THREAD_STACK_SIZE   8192
 #else
 #define THREAD_STACK_SIZE   16384

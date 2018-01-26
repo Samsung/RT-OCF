@@ -167,7 +167,7 @@ TEST_GROUP_RUNNER(test_receive_queue)
 	RUN_TEST_CASE(test_receive_queue, dequeue_handler);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

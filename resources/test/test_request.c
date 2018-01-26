@@ -322,7 +322,7 @@ TEST_GROUP_RUNNER(test_request)
 	RUN_TEST_CASE(test_request, discovery_with_rt_query);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_SEC_DOXM_RESOURCE_H
-#define __IOTIVITY_RT_SEC_DOXM_RESOURCE_H
+#ifndef __RT_OCF_SEC_DOXM_RESOURCE_H
+#define __RT_OCF_SEC_DOXM_RESOURCE_H
 
 #include "rt_rep.h"
 #include "rt_uuid.h"

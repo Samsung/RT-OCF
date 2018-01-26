@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_REP_H
-#define __IOTIVITY_RT_REP_H
+#ifndef __RT_OCF_REP_H
+#define __RT_OCF_REP_H
 
 #include "cbor.h"
 #include "ocf_rep.h"
@@ -108,4 +108,4 @@ ocf_result_t rt_rep_get_array_array(const rt_rep_decoder_s *rep, uint16_t size, 
 void rt_rep_encoder_log(const rt_rep_encoder_s *rep);
 void rt_rep_decoder_log(const rt_rep_decoder_s *rep, uint8_t indent);
 
-#endif							/* __IOTIVITY_RT_REP_H */
+#endif							/* __RT_OCF_REP_H */

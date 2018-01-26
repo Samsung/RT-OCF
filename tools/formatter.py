@@ -3,15 +3,15 @@
 import sys
 import os
 
-from internal.config import IOTIVITY_RT_ROOT
-from internal.config import IOTIVITY_RT_ROOT_TOOLS
+from internal.config import RT_OCF_ROOT
+from internal.config import RT_OCF_ROOT_TOOLS
 
 from internal.utils import write_result
 from internal.utils import execute
-from internal.utils import find_iotivity_rt_source_files
+from internal.utils import find_RT_OCF_source_files
 from subprocess import call
 
-FORMATTER_PATH = os.path.join(IOTIVITY_RT_ROOT_TOOLS, 'formatter.sh')
+FORMATTER_PATH = os.path.join(RT_OCF_ROOT_TOOLS, 'formatter.sh')
 
 
 def format(file_list):
@@ -23,8 +23,8 @@ def format(file_list):
 def run(targets, is_all):
     if is_all:
         targets = []
-        targets.append(IOTIVITY_RT_ROOT)
-    file_list = find_iotivity_rt_source_files(targets)
+        targets.append(RT_OCF_ROOT)
+    file_list = find_RT_OCF_source_files(targets)
 
     format(file_list)
 

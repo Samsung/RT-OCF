@@ -1,4 +1,4 @@
-class IotivityRTError(Exception):
+class RT_OCFError(Exception):
     def __init__(self, exitcode, message='', output=''):
         self.exitcode = exitcode
         self.message = message

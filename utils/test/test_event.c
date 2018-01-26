@@ -146,7 +146,7 @@ TEST_GROUP_RUNNER(test_event)
 	RUN_TEST_CASE(test_event, rt_event_wait_ok_dueto_event);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

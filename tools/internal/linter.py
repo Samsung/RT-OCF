@@ -1,12 +1,12 @@
 import os
 import subprocess
-from internal.config import IOTIVITY_RT_ROOT_TOOLS_INTERNAL
+from internal.config import RT_OCF_ROOT_TOOLS_INTERNAL
 from internal.common import Result
 from internal.utils import execute_return_output
 from internal.utils import print_fail, print_green
 
 TIZEN_LINT_TOOL = os.path.join(
-    IOTIVITY_RT_ROOT_TOOLS_INTERNAL,
+    RT_OCF_ROOT_TOOLS_INTERNAL,
     'checkpatch_tizen.pl')
 
 

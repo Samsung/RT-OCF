@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_COLLECTION_H
-#define __IOTIVITY_RT_COLLECTION_H
+#ifndef __RT_OCF_COLLECTION_H
+#define __RT_OCF_COLLECTION_H
 
 #include "ocf_resources.h"
 
@@ -28,4 +28,4 @@ ocf_result_t rt_res_remove_links(rt_resource_s *parent);
 //ocf_result_t rt_res_init_links(void);
 //ocf_result_t rt_res_terminate_links(void);
 
-#endif							/* __IOTIVITY_RT_COLLECTION_H */
+#endif							/* __RT_OCF_COLLECTION_H */

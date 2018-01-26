@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_RANDOM_H
-#define __IOTIVITY_RT_RANDOM_H
+#ifndef __RT_OCF_RANDOM_H
+#define __RT_OCF_RANDOM_H
 
 #include <stdint.h>
 
@@ -25,4 +25,4 @@ void rt_random_init(void);
 uint16_t rt_random_rand(void);
 void rt_random_rand_to_buffer(uint8_t *buffer, size_t size);
 
-#endif							/* __IOTIVITY_RT_RANDOM_H */
+#endif							/* __RT_OCF_RANDOM_H */

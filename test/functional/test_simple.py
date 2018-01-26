@@ -11,8 +11,8 @@ from common import bcolors
 from threading import Thread
 from Queue import Queue, Empty
 
-IOTIVITY_RT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-LINUX_BUILD_DIR = os.path.join(IOTIVITY_RT_ROOT, 'os', 'linux')
+RT_OCF_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+LINUX_BUILD_DIR = os.path.join(RT_OCF_ROOT, 'os', 'linux')
 SIMPLE_SERVER = os.path.join(LINUX_BUILD_DIR, 'simple_server')
 SIMPLE_CLIENT = os.path.join(LINUX_BUILD_DIR, 'simple_client')
 

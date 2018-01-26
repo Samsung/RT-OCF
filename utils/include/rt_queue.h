@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_QUEUE_H
-#define __IOTIVITY_RT_QUEUE_H
+#ifndef __RT_OCF_QUEUE_H
+#define __RT_OCF_QUEUE_H
 
 #include "ocf_types.h"
 
@@ -40,4 +40,4 @@ rt_queue_element_s *rt_queue_pop(rt_queue_s *queue);
 ocf_result_t rt_queue_remove_item(rt_queue_element_s *element, rt_queue_item_free_func free_func);
 ocf_result_t rt_queue_terminate(rt_queue_s *queue, rt_queue_item_free_func free_func);
 
-#endif							/* __IOTIVITY_RT_QUEUE_H */
+#endif							/* __RT_OCF_QUEUE_H */

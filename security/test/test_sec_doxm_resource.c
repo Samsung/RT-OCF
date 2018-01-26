@@ -29,7 +29,7 @@
 
 #define TAG "TC_SEC_DOXM"
 
-#ifdef CONFIG_IOTIVITY_RT
+#ifdef CONFIG_ENABLE_RT_OCF
 static const char DOXM_TC_DOXM_PS_PATH[] = "/mnt/test_svr_doxm.dat";
 #else
 static char DOXM_TC_DOXM_PS_PATH[] = "test_svr_doxm.dat";
@@ -164,7 +164,7 @@ TEST_GROUP_RUNNER(test_sec_doxm_resource)
 	RUN_TEST_CASE(test_sec_doxm_resource, rt_convert_doxm_to_payload);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

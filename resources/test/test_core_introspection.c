@@ -87,7 +87,7 @@ TEST_GROUP_RUNNER(test_core_introspection)
 	RUN_TEST_CASE(test_core_introspection, check_core_introspection_response_is_valid);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

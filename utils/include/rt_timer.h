@@ -84,8 +84,8 @@
  * @{
  */
 
-#ifndef __IOTIVITY_RT_TIMER_H
-#define __IOTIVITY_RT_TIMER_H
+#ifndef __RT_OCF_TIMER_H
+#define __RT_OCF_TIMER_H
 
 #include <stdint.h>
 #include <time.h>
@@ -114,4 +114,4 @@ void rt_timer_restart(rt_timer_s *t);
 int rt_timer_expired(rt_timer_s *t);
 rt_clock_time_t rt_timer_remaining(rt_timer_s *t);
 
-#endif							/* __IOTIVITY_RT_TIMER_H */
+#endif							/* __RT_OCF_TIMER_H */

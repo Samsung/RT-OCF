@@ -3,9 +3,9 @@ import sys
 import os
 
 MOCK = 'Mock'
-IOTIVITY_RT_ROOT = os.path.abspath(
+RT_OCF_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), ".."))
-MOCK_DIR = os.path.abspath(os.path.join(IOTIVITY_RT_ROOT, "os/linux/mocks"))
+MOCK_DIR = os.path.abspath(os.path.join(RT_OCF_ROOT, "os/linux/mocks"))
 
 
 def is_include_list(target_src, src_list):
@@ -43,7 +43,7 @@ def get_file_name(include_str):
 
 
 def find_test_file_path(name):
-    for (path, dir, files) in os.walk(IOTIVITY_RT_ROOT):
+    for (path, dir, files) in os.walk(RT_OCF_ROOT):
         for filename in files:
             if filename != name:
                 continue

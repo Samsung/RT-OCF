@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_UTILS_H
-#define __IOTIVITY_RT_UTILS_H
+#ifndef __RT_OCF_UTILS_H
+#define __RT_OCF_UTILS_H
 
 #include "rt_logger.h"
 
@@ -54,4 +54,4 @@
 #define RT_VERIFY_NON_ZERO_VOID(arg, tag, log_message) \
 	RT_VERIFY_NON_NULL_VOID((arg), (tag), (log_message)) \
 
-#endif							/* __IOTIVITY_RT_UTILS_H */
+#endif							/* __RT_OCF_UTILS_H */

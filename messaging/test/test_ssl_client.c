@@ -248,7 +248,7 @@ TEST_GROUP_RUNNER(test_ssl_client)
 	stop_mock_server();
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {
@@ -298,7 +298,7 @@ mbedtls_timing_delay_context timer;
 #define FD_SETSIZE	(CONFIG_NFILE_DESCRIPTORS + CONFIG_NSOCKET_DESCRIPTORS)
 #endif
 
-#ifdef CONFIG_IOTIVITY_RT
+#ifdef CONFIG_ENABLE_RT_OCF
 #define RCV_THREAD_STACK_SIZE   10240
 #else
 #define RCV_THREAD_STACK_SIZE   16384

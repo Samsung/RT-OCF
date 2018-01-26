@@ -17,7 +17,7 @@
 # ****************************************************************************/
 
 
-ifneq ($(CONFIG_IOTIVITY_RT),y)
+ifneq ($(CONFIG_ENABLE_RT_OCF),y)
 CSRCS += $(wildcard ${IOTIVITY_ROOT}/extlibs/mbedtls/*.c)
 INC += -I${IOTIVITY_ROOT}/extlibs/mbedtls/include
 DEPPATH += --dep-path ${IOTIVITY_ROOT}/extlibs/mbedtls

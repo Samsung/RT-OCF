@@ -5,7 +5,7 @@ import os
 from config import LINUX_BUILD_DIR
 from config import LINUX_LINUX_TEST_DIR
 from config import LINUX_LINUX_TEST_BIN_DIR
-from config import IOTIVITY_RT_ROOT_TOOLS_INTERNAL
+from config import RT_OCF_ROOT_TOOLS_INTERNAL
 
 
 from common import Result
@@ -16,10 +16,10 @@ from utils import raise_exception_if_exitcode_is_error
 from utils import get_test_options
 
 
-from iotivity_rt_error import IotivityRTError
+from RT_OCF_error import RT_OCFError
 
 TEST_SUMMARY_FILE = os.path.join(
-    IOTIVITY_RT_ROOT_TOOLS_INTERNAL,
+    RT_OCF_ROOT_TOOLS_INTERNAL,
     'test_summary.rb')
 
 BUILD_FAIL_MESSAGE = "Build is Failed T^T"
@@ -36,14 +36,14 @@ class LinuxAdapter:
         try:
             self.make()
         except subprocess.CalledProcessError as e:
-            raise IotivityRTError(e.returncode, message=BUILD_FAIL_MESSAGE)
+            raise RT_OCFError(e.returncode, message=BUILD_FAIL_MESSAGE)
 
     def test(self, verbose=False, group='', name='', repeat=1):
         try:
             options = get_test_options(verbose=verbose, name=name, repeat=repeat)
             return self.execute_test_binary(options=options, target_str=group)
         except subprocess.CalledProcessError as e:
-            raise IotivityRTError(e.returncode, message=TEST_FAIL_MESSAGE)
+            raise RT_OCFError(e.returncode, message=TEST_FAIL_MESSAGE)
 
     def coverage_lcov(self):
         result = Result(message='')
@@ -58,7 +58,7 @@ class LinuxAdapter:
             result.message = self.get_coverage_message(result.data)
             return result
         except subprocess.CalledProcessError as e:
-            raise IotivityRTError(e.returncode, message=COVERAGE_FAIL_MESSAGE)
+            raise RT_OCFError(e.returncode, message=COVERAGE_FAIL_MESSAGE)
 
     def get_coverage_message(self, output):
         line_coverage = '0%'
@@ -79,7 +79,7 @@ class LinuxAdapter:
                 command += ' WITH_COVERAGE=1'
             execute('sh -c "cd {} && {}"'.format(LINUX_BUILD_DIR, command))
         except subprocess.CalledProcessError as e:
-            raise IotivityRTError(e.returncode, message=TESTBINARY_FAIL_MESSAGE)
+            raise RT_OCFError(e.returncode, message=TESTBINARY_FAIL_MESSAGE)
 
     def execute_test_binary(self, options='', target_str=''):
         execute('rm -rf {}/*.result'.format(LINUX_LINUX_TEST_BIN_DIR))

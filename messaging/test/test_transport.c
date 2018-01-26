@@ -144,7 +144,7 @@ TEST_GROUP_RUNNER(test_transport)
 	RUN_TEST_CASE(test_transport, rt_transport_get_local_ipv4);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

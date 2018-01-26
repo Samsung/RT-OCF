@@ -1,9 +1,9 @@
 from subprocess import call
 import os
 
-from tools.internal.config import IOTIVITY_RT_ROOT
+from tools.internal.config import RT_OCF_ROOT
 
-INVALID_FILEPATH = os.path.join(IOTIVITY_RT_ROOT, 'manager', 'invalid.c')
+INVALID_FILEPATH = os.path.join(RT_OCF_ROOT, 'manager', 'invalid.c')
 
 
 def make_fail_file():

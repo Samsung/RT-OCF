@@ -465,7 +465,7 @@ TEST_GROUP_RUNNER(test_resources)
 	RUN_TEST_CASE(test_resources, rt_res_add_if_rt_rep);
 }
 
-#ifndef CONFIG_IOTIVITY_RT
+#ifndef CONFIG_ENABLE_RT_OCF
 
 static void RunAllTests(void)
 {

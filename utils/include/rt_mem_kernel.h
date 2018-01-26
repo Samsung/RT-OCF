@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_MEM_KERNEL_H
-#define __IOTIVITY_RT_MEM_KERNEL_H
+#ifndef __RT_OCF_MEM_KERNEL_H
+#define __RT_OCF_MEM_KERNEL_H
 
 #include "rt_mem.h"
 
@@ -25,4 +25,4 @@ ocf_result_t rt_mem_kernel_init(mem_info_s *mInfo);
 void *rt_mem_kernel_alloc(mem_info_s *mInfo, uint32_t size);
 unsigned int rt_mem_kernel_free(mem_info_s *mInfo, void *ptr);
 int rt_mem_kernel_terminate(mem_info_s *mInfo);
-#endif							/* __IOTIVITY_RT_MEM_KERNEL_H */
+#endif							/* __RT_OCF_MEM_KERNEL_H */

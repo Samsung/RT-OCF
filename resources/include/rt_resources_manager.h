@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_RESOURCES_MANAGER_H
-#define __IOTIVITY_RT_RESOURCES_MANAGER_H
+#ifndef __RT_OCF_RESOURCES_MANAGER_H
+#define __RT_OCF_RESOURCES_MANAGER_H
 
 #include "ocf_types.h"
 

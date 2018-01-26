@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_MESSAGE_QUEUE_H
-#define __IOTIVITY_RT_MESSAGE_QUEUE_H
+#ifndef __RT_OCF_MESSAGE_QUEUE_H
+#define __RT_OCF_MESSAGE_QUEUE_H
 
 #include <stdint.h>
 
@@ -40,4 +40,4 @@ typedef struct {
 ocf_result_t rt_message_queue_init(rt_message_queue_s *message_queue, msg_queue_running_func func, rt_queue_item_free_func free_func, const char *name);
 ocf_result_t rt_message_queue_enqueue(rt_message_queue_s *message_queue, void *data);
 void rt_message_queue_terminate(rt_message_queue_s *message_queue);
-#endif							/* __IOTIVITY_RT_MESSAGE_QUEUE_H */
+#endif							/* __RT_OCF_MESSAGE_QUEUE_H */

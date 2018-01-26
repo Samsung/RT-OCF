@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_LIST_H
-#define __IOTIVITY_RT_LIST_H
+#ifndef __RT_OCF_LIST_H
+#define __RT_OCF_LIST_H
 
 #include <stddef.h>
 #include <pthread.h>
@@ -56,4 +56,4 @@ void *rt_list_delete_by_node(rt_list_s *list, rt_node_s *node);
 void *rt_list_get_item(const rt_list_s *list, rt_node_s *node);
 void rt_list_terminate(rt_list_s *list, rt_list_release_item_cb func);
 
-#endif							/* __IOTIVITY_RT_LIST_H */
+#endif							/* __RT_OCF_LIST_H */

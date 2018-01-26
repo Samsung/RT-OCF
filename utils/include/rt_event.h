@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_EVENT_H
-#define __IOTIVITY_RT_EVENT_H
+#ifndef __RT_OCF_EVENT_H
+#define __RT_OCF_EVENT_H
 
 #include "ocf_types.h"
 #include "rt_timer.h"
@@ -29,4 +29,4 @@ int rt_event_timedwait(const rt_clock_time_t timeout);
 int rt_event_wait(void);
 int rt_event_set_signal(void);
 
-#endif							/* __IOTIVITY_RT_EVENT_H */
+#endif							/* __RT_OCF_EVENT_H */

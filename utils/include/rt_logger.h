@@ -16,8 +16,8 @@
  *
  ****************************************************************************/
 
-#ifndef __IOTIVITY_RT_LOGGER_H
-#define __IOTIVITY_RT_LOGGER_H
+#ifndef __RT_OCF_LOGGER_H
+#define __RT_OCF_LOGGER_H
 
 #include <stdint.h>
 
@@ -29,37 +29,37 @@ typedef enum {
 	OCF_LOG_FATAL,
 } ocf_log_level_t;
 
-#ifdef CONFIG_IOTIVITY_RT_LOG_DEBUG
+#ifdef CONFIG_RT_OCF_LOG_DEBUG
 #define LOGLEVEL_DEBUG 1
 #else
 #define LOGLEVEL_DEBUG 0
 #endif
 
-#ifdef CONFIG_IOTIVITY_RT_LOG_INFO
+#ifdef CONFIG_RT_OCF_LOG_INFO
 #define LOGLEVEL_INFO (1 << 1)
 #else
 #define LOGLEVEL_INFO 0
 #endif
 
-#ifdef CONFIG_IOTIVITY_RT_LOG_WARNING
+#ifdef CONFIG_RT_OCF_LOG_WARNING
 #define LOGLEVEL_WARNING (1 << 2)
 #else
 #define LOGLEVEL_WARNING 0
 #endif
 
-#ifdef CONFIG_IOTIVITY_RT_LOG_ERROR
+#ifdef CONFIG_RT_OCF_LOG_ERROR
 #define LOGLEVEL_ERROR (1 << 3)
 #else
 #define LOGLEVEL_ERROR 0
 #endif
 
-#ifdef CONFIG_IOTIVITY_RT_LOG_FATAL
+#ifdef CONFIG_RT_OCF_LOG_FATAL
 #define LOGLEVEL_FATAL (1 << 4)
 #else
 #define LOGLEVEL_FATAL 0
 #endif
 
-#ifdef CONFIG_IOTIVITY_RT_DEBUG
+#ifdef CONFIG_RT_OCF_DEBUG
 #define LOGLEVEL (LOGLEVEL_DEBUG | LOGLEVEL_INFO | LOGLEVEL_WARNING | LOGLEVEL_ERROR | LOGLEVEL_FATAL)
 #else
 #define LOGLEVEL 0
@@ -84,4 +84,4 @@ typedef enum {
 void __rt_log(ocf_log_level_t level, const char *tag, const char *fmt, ...);
 void __rt_log_buffer(ocf_log_level_t level, const char *tag, const void *buffer, int32_t buffer_size);
 
-#endif							/* __IOTIVITY_RT_LOGGER_H */
+#endif							/* __RT_OCF_LOGGER_H */
