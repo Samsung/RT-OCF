@@ -56,6 +56,7 @@ $ git clone https://github.com/Samsung/RT-OCF.git
 For Setup RT-OCF options
 
 ```sh
+$ cd os/linux
 os/linux$ make menuconfig
 ```
 
@@ -65,24 +66,8 @@ os/linux$ make menuconfig
 
 For Building RT-OCF with linux
 
-**python script(recommended)**
-
 ```sh
-$ ./tools/build.py linux -h
-usage: build.py linux [-h] [--rebuild] [--ci]
-
-Linux Build
-
-optional arguments:
-  -h, --help  show this help message and exit
-  --rebuild   True, Build after clean
-  --ci        True, if it is ci build.
-```
-
-**shell script**
-
-```sh
-$ tools/build_linux.sh
+os/linux$ make
 ```
 
 ### TizenRT
